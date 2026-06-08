@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>🌸 animal crossing pomodoro garden</title>
-  <!-- pixel font -->
+  <title>🌸 pomodoro animal crossing garden · cutesy pixel</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     * {
@@ -13,95 +12,124 @@
       box-sizing: border-box;
       image-rendering: crisp-edges;
       image-rendering: pixelated;
-      image-rendering: pixelated;
     }
 
     body {
-      background: #C8DFB0;  /* soft sage background */
+      background: #D0E7C0;  /* soft sage background */
       font-family: 'Press Start 2P', 'Courier New', monospace;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      padding: 1rem;
+      padding: 1.5rem;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    /* retro game window */
+    /* floating stars & hearts */
+    .floating-deco {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1.2rem;
+      animation: floatAround 8s infinite ease-in-out;
+      z-index: 10;
+    }
+    @keyframes floatAround {
+      0% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
+      50% { transform: translateY(-20px) rotate(10deg); opacity: 1; }
+      100% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
+    }
+    /* random positions for decoration */
+    .star1 { top: 10%; left: 5%; animation-duration: 6s; }
+    .star2 { top: 20%; right: 3%; animation-duration: 7s; }
+    .heart1 { bottom: 15%; left: 8%; animation-duration: 5s; font-size: 1.5rem; }
+    .heart2 { top: 40%; right: 10%; animation-duration: 9s; }
+    .sparkle1 { bottom: 30%; left: 85%; animation-duration: 6.5s; }
+
+    /* main game window */
     .game-container {
-      max-width: 750px;
+      max-width: 800px;
       width: 100%;
-      background: #FEF8E7;
-      border: 5px solid #9BBC7A;
-      box-shadow: 8px 8px 0 #6A8E5C;
-      border-radius: 0; /* sharp corners for pixel feel */
+      background: #FFF8ED;  /* warm cream */
+      border: 5px solid #A8CF9E;
+      box-shadow: 10px 10px 0 #6A8E5C;
+      border-radius: 0;
+      position: relative;
+      z-index: 2;
     }
 
     .header {
-      background: #E2EEC9;
+      background: #F2EFD0;
       padding: 1rem;
       text-align: center;
-      border-bottom: 3px solid #9BBC7A;
+      border-bottom: 3px solid #A8CF9E;
     }
 
     .back-home {
       display: inline-block;
-      background: #F4E7C3;
-      border: 2px solid #9BBC7A;
+      background: #FCE8D5;
+      border: 2px solid #A8CF9E;
       padding: 0.3rem 0.8rem;
       text-decoration: none;
       font-size: 0.55rem;
       color: #5C7A4A;
       font-family: inherit;
-      box-shadow: 3px 3px 0 #9BBC7A;
+      box-shadow: 3px 3px 0 #A8CF9E;
       transition: 0.05s linear;
       margin-bottom: 0.5rem;
     }
     .back-home:active {
       transform: translate(2px, 2px);
-      box-shadow: 1px 1px 0 #9BBC7A;
+      box-shadow: 1px 1px 0 #A8CF9E;
     }
 
     h1 {
       font-size: 0.9rem;
       color: #6A8E5C;
       letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
-    /* canvas area (pixel garden) */
+    /* canvas area */
     .garden-canvas-wrapper {
       padding: 1rem;
-      background: #E6D5B3;
+      background: #EADFB8;
       display: flex;
       justify-content: center;
     }
     canvas {
       display: block;
       margin: 0 auto;
-      box-shadow: 4px 4px 0 #9BBC7A;
+      box-shadow: 6px 6px 0 #A8CF9E;
       image-rendering: crisp-edges;
       image-rendering: pixelated;
       width: 100%;
       height: auto;
-      background: #BCDA9A; /* grass */
+      background: #BCDA9A;
     }
 
-    /* timer panel below canvas */
+    /* timer panel - pastel */
     .timer-panel {
-      background: #FEF8E7;
+      background: #FCE8D5;  /* pastel peach */
       margin: 1rem;
       padding: 1rem;
-      border: 3px solid #9BBC7A;
-      box-shadow: inset 0 0 0 2px #FFF6E0, 0 4px 0 #6A8E5C;
+      border: 3px solid #A8CF9E;
+      box-shadow: inset 0 0 0 2px #FFF2E0, 0 4px 0 #6A8E5C;
     }
     .timer-display {
       font-size: 1.5rem;
       text-align: center;
       background: #2C3E2B;
-      color: #CBE5C1;
+      color: #E2F0D6;
       padding: 0.5rem;
       font-family: 'Press Start 2P', monospace;
       letter-spacing: 3px;
       margin-bottom: 1rem;
+      border-radius: 0;
     }
     .timer-buttons {
       display: flex;
@@ -110,12 +138,12 @@
       flex-wrap: wrap;
     }
     .timer-btn {
-      background: #E5EFDC;
+      background: #E2F0D6;
       border: none;
       font-family: 'Press Start 2P', monospace;
       font-size: 0.65rem;
       padding: 0.5rem 1rem;
-      color: #3A5C34;
+      color: #4A6B3F;
       cursor: pointer;
       box-shadow: 3px 3px 0 #6A8E5C;
       transition: 0.05s linear;
@@ -125,60 +153,84 @@
       box-shadow: 1px 1px 0 #6A8E5C;
     }
 
+    /* controls row - pastel background */
     .controls {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: 0.5rem 1rem 1rem 1rem;
-      font-size: 0.5rem;
+      margin: 0.5rem 1rem 0.8rem 1rem;
       flex-wrap: wrap;
+      gap: 10px;
+      background: #EADFB8;  /* pastel sand */
+      padding: 0.5rem 1rem;
+      border: 2px solid #A8CF9E;
+    }
+    .controls span {
+      font-size: 0.55rem;
+      color: #4A6B3F;
+      background: none;
+      padding: 0;
     }
     .reset-garden {
-      background: #E2C8A8;
-      border: 2px solid #9BBC7A;
+      background: #FCE8D5;
+      border: 2px solid #A8CF9E;
       padding: 0.3rem 0.8rem;
       font-family: inherit;
       font-size: 0.55rem;
       cursor: pointer;
       color: #5C7A4A;
-      box-shadow: 2px 2px 0 #9BBC7A;
+      box-shadow: 2px 2px 0 #A8CF9E;
     }
+
     .info-text {
-      background: #F4E7C3;
-      padding: 0.4rem;
+      background: #FCE8D5;
+      padding: 0.6rem;
       text-align: center;
       font-size: 0.45rem;
       margin: 0 1rem 1rem 1rem;
+      border: 1px solid #A8CF9E;
+      color: #5C7A4A;
+      line-height: 1.4;
     }
+
     .footer {
       background: #E2EEC9;
       text-align: center;
       padding: 0.7rem;
       font-size: 0.45rem;
-      border-top: 3px solid #9BBC7A;
+      border-top: 3px solid #A8CF9E;
       color: #6A8E5C;
     }
+
     @media (max-width: 550px) {
       .timer-display { font-size: 1rem; }
       .timer-btn { font-size: 0.5rem; }
       h1 { font-size: 0.7rem; }
+      .controls span { font-size: 0.45rem; }
     }
   </style>
 </head>
 <body>
+<div class="floating-deco star1">⭐️</div>
+<div class="floating-deco star2">✨</div>
+<div class="floating-deco heart1">💖</div>
+<div class="floating-deco heart2">🌸</div>
+<div class="floating-deco sparkle1">🌟</div>
+
 <div class="game-container">
   <div class="header">
     <a href="index.html" class="back-home">← back home</a>
-    <h1>🌾 POMODORO VILLAGE GARDEN 🌸</h1>
-    <p style="font-size:0.45rem; margin-top:6px;">each focus session = water your plants → they grow!</p>
+    <h1>
+      🌾 POMODORO VILLAGE GARDEN 🌸
+      <span>🎀</span>
+    </h1>
+    <p style="font-size:0.45rem; margin-top:6px;">each focus session = water a random plant → it grows!</p>
   </div>
 
-  <!-- canvas draws the whole scene (background + character + plants) -->
   <div class="garden-canvas-wrapper">
-    <canvas id="gardenCanvas" width="600" height="400" style="width:100%; height:auto; max-width:600px; aspect-ratio:600/400"></canvas>
+    <canvas id="gardenCanvas" width="640" height="450" style="width:100%; height:auto; max-width:640px; aspect-ratio:640/450"></canvas>
   </div>
 
-  <!-- timer -->
   <div class="timer-panel">
     <div class="timer-display" id="timerDisplay">25:00</div>
     <div class="timer-buttons">
@@ -189,62 +241,56 @@
   </div>
 
   <div class="controls">
-    <span>🌱 plant growth: 0/16</span>
+    <span>🌱 grown fruit: <span id="fruitCount">0</span>/16</span>
     <button class="reset-garden" id="resetGardenBtn">🗑️ clear garden</button>
   </div>
   <div class="info-text">
-    💾 auto-saved · each completed pomodoro waters a random unwatered plant → it grows one stage!<br>
-    🌟 stages: seed → sprout → flower → fruit (then fully grown)
+    💾 auto-saved · each completed pomodoro grows a random plant one stage (seed → sprout → flower → fruit)<br>
+    🍃 extra flowers & animal friends make the garden cozy!
   </div>
   <div class="footer">
-    🎮 pixel animal crossing vibe · pastel sage · be kind to your focus
+    🎮 pixel animal crossing vibe · pastel sage & hearts · keep growing
   </div>
 </div>
 
 <script>
   (function() {
     // ---------- GARDEN DATA ----------
-    // 4x4 grid = 16 plants
     const GRID_SIZE = 4;
     const TOTAL_PLANTS = GRID_SIZE * GRID_SIZE;
-    // growth stages: 0=seed, 1=sprout, 2=flower, 3=fruit (full)
-    let gardenStages = new Array(TOTAL_PLANTS).fill(0);
-    // track which plants have been watered this session? Actually each pomodoro = +1 stage to a random uncompleted plant
-    // but we need to avoid over-watering the same plant? better: pick a random plant that is not yet at max stage
-    
+    let gardenStages = new Array(TOTAL_PLANTS).fill(0); // 0=seed,1=sprout,2=flower,3=fruit
     const GARDEN_KEY = 'ac_pomodoro_garden';
     
-    // load from localStorage
     function loadGarden() {
       const saved = localStorage.getItem(GARDEN_KEY);
-      if (saved) {
-        gardenStages = JSON.parse(saved);
-      } else {
-        gardenStages = new Array(TOTAL_PLANTS).fill(0);
-      }
+      if (saved) gardenStages = JSON.parse(saved);
+      else gardenStages.fill(0);
       drawCanvas();
+      updateFruitCounter();
     }
-    
     function saveGarden() {
       localStorage.setItem(GARDEN_KEY, JSON.stringify(gardenStages));
+      updateFruitCounter();
+    }
+    function updateFruitCounter() {
+      const fruitCount = gardenStages.filter(s => s === 3).length;
+      document.getElementById('fruitCount').innerText = fruitCount;
     }
     
-    // add growth to a random plant that is not yet fruit (stage < 3)
     function waterRandomPlant() {
-      const incompleteIndices = [];
+      const incomplete = [];
       for (let i = 0; i < TOTAL_PLANTS; i++) {
-        if (gardenStages[i] < 3) incompleteIndices.push(i);
+        if (gardenStages[i] < 3) incomplete.push(i);
       }
-      if (incompleteIndices.length === 0) {
-        // all plants fully grown: show message
+      if (incomplete.length === 0) {
         const info = document.querySelector('.info-text');
         const original = info.innerHTML;
-        info.innerHTML = '🎉 your garden is fully grown! clear it to start again 🎉';
-        setTimeout(() => { info.innerHTML = original; }, 3000);
+        info.innerHTML = '🎉 GARDEN FULL OF FRUIT! Clear to start again 🎉';
+        setTimeout(() => info.innerHTML = original, 3000);
         return false;
       }
-      const randomIndex = incompleteIndices[Math.floor(Math.random() * incompleteIndices.length)];
-      gardenStages[randomIndex] = Math.min(gardenStages[randomIndex] + 1, 3);
+      const idx = incomplete[Math.floor(Math.random() * incomplete.length)];
+      gardenStages[idx] = Math.min(gardenStages[idx] + 1, 3);
       saveGarden();
       drawCanvas();
       return true;
@@ -256,167 +302,193 @@
       drawCanvas();
     }
     
-    // ---------- CANVAS DRAWING (pixel art) ----------
+    // ---------- CANVAS DRAWING (pixel art, more characters & flowers) ----------
     const canvas = document.getElementById('gardenCanvas');
     const ctx = canvas.getContext('2d');
-    // pixel scaling – disable smoothing
     ctx.imageSmoothingEnabled = false;
+    const W = 640, H = 450;
+    canvas.width = W; canvas.height = H;
     
-    // dimensions: 600x400
-    const W = 600, H = 400;
-    canvas.width = W;
-    canvas.height = H;
-    
-    // Helper: draw pixelated rectangle (no anti-aliasing)
-    function drawPixelRect(x, y, w, h, color) {
-      ctx.fillStyle = color;
-      ctx.fillRect(x, y, w, h);
-    }
-    
-    // draw background (sky, grass, fence)
+    // background
     function drawBackground() {
       // sky
-      drawPixelRect(0, 0, W, 150, '#D9F0E6'); // pastel sky
+      ctx.fillStyle = '#DCF2EA';
+      ctx.fillRect(0, 0, W, 140);
       // grass
-      drawPixelRect(0, 150, W, 250, '#BCDA9A');
-      // clouds (pixel style)
+      ctx.fillStyle = '#BCDA9A';
+      ctx.fillRect(0, 140, W, H-140);
+      // clouds
       ctx.fillStyle = '#FFF9E8';
-      ctx.fillRect(80, 40, 50, 20);
-      ctx.fillRect(100, 20, 40, 20);
-      ctx.fillRect(420, 60, 60, 20);
-      ctx.fillRect(440, 40, 40, 20);
+      ctx.fillRect(50, 40, 55, 22);
+      ctx.fillRect(75, 25, 40, 22);
+      ctx.fillRect(480, 60, 60, 22);
+      ctx.fillRect(500, 45, 40, 20);
+      // sun (pixel)
+      ctx.fillStyle = '#F9E7B3';
+      ctx.fillRect(560, 20, 30, 30);
+      ctx.fillStyle = '#FFD966';
+      ctx.fillRect(565, 25, 20, 20);
       
-      // fence posts (simple)
+      // fence
       ctx.fillStyle = '#D4B88C';
-      for (let x = 20; x < W; x += 50) {
-        ctx.fillRect(x, 140, 6, 25);
-        ctx.fillRect(x+2, 148, 2, 15);
+      for (let x = 15; x < W; x += 55) {
+        ctx.fillRect(x, 130, 7, 25);
+        ctx.fillRect(x+2, 138, 3, 12);
       }
+      
+      // decorative flowers on grass (static)
+      const flowerPositions = [[30,180], [90,220], [550,190], [600,280], [50,320], [580,380]];
+      flowerPositions.forEach(([x,y]) => {
+        ctx.fillStyle = '#F4B3C2';
+        ctx.fillRect(x, y, 5, 5);
+        ctx.fillStyle = '#F7D695';
+        ctx.fillRect(x+1, y+1, 3, 3);
+        ctx.fillStyle = '#6B8C5C';
+        ctx.fillRect(x+2, y-2, 2, 4);
+      });
     }
     
-    // draw soil plots (4x4 grid)
-    const plotW = 70, plotH = 50;
-    const startX = 40, startY = 200;
-    const spacingX = 15, spacingY = 15;
+    // soil plots
+    const plotW = 68, plotH = 48;
+    const startX = 45, startY = 190;
+    const spacingX = 12, spacingY = 12;
     
     function drawPlots() {
       for (let row = 0; row < GRID_SIZE; row++) {
         for (let col = 0; col < GRID_SIZE; col++) {
           const x = startX + col * (plotW + spacingX);
           const y = startY + row * (plotH + spacingY);
-          // soil color
+          // soil
           ctx.fillStyle = '#8B5E3C';
           ctx.fillRect(x, y, plotW, plotH);
-          // dark border
           ctx.strokeStyle = '#5C3A1E';
           ctx.lineWidth = 2;
           ctx.strokeRect(x+1, y+1, plotW-2, plotH-2);
           
-          // draw plant based on stage
           const idx = row * GRID_SIZE + col;
           const stage = gardenStages[idx];
-          const centerX = x + plotW/2;
-          const bottomY = y + plotH - 8;
+          const cx = x + plotW/2;
+          const bottomY = y + plotH - 6;
           
-          if (stage > 0) {
-            // draw pixel plant at position
-            drawPlant(centerX, bottomY, stage);
-          } else {
-            // seed (tiny brown dot)
+          if (stage === 0) {
+            // seed
             ctx.fillStyle = '#5C3A1E';
-            ctx.fillRect(centerX-3, bottomY-2, 6, 4);
+            ctx.fillRect(cx-3, bottomY-3, 6, 4);
+          } else {
+            drawPlant(cx, bottomY, stage);
           }
         }
       }
     }
     
     function drawPlant(cx, cy, stage) {
-      // pixel art plant based on stage
-      // stage 1: sprout (two green pixels)
-      // stage 2: flower (pink/magenta)
-      // stage 3: fruit (red/orange berry)
-      ctx.fillStyle = '#6B8C5C';
-      if (stage === 1) {
+      if (stage === 1) { // sprout
+        ctx.fillStyle = '#6B8C5C';
         ctx.fillRect(cx-3, cy-10, 3, 12);
         ctx.fillRect(cx+1, cy-8, 3, 10);
         ctx.fillStyle = '#A8D48A';
         ctx.fillRect(cx-3, cy-12, 3, 3);
         ctx.fillRect(cx+1, cy-10, 3, 3);
-      } 
-      else if (stage === 2) {
-        // stem
+      } else if (stage === 2) { // flower
         ctx.fillStyle = '#6B8C5C';
         ctx.fillRect(cx-2, cy-12, 4, 14);
-        // flower petals
-        ctx.fillStyle = '#F4B3C2'; // pastel pink
+        ctx.fillStyle = '#F4B3C2';
         ctx.fillRect(cx-5, cy-16, 3, 5);
         ctx.fillRect(cx+2, cy-16, 3, 5);
         ctx.fillRect(cx-1, cy-18, 3, 5);
-        ctx.fillStyle = '#F7D695'; // center
+        ctx.fillStyle = '#F7D695';
         ctx.fillRect(cx-1, cy-14, 3, 3);
-      } 
-      else if (stage === 3) {
-        // fruit (little strawberry or peach)
+      } else if (stage === 3) { // fruit
         ctx.fillStyle = '#6B8C5C';
         ctx.fillRect(cx-2, cy-10, 4, 12);
-        ctx.fillStyle = '#E67E5E'; // peach
-        ctx.fillRect(cx-4, cy-16, 8, 8);
+        ctx.fillStyle = '#E67E5E';
+        ctx.fillRect(cx-5, cy-16, 10, 9);
         ctx.fillStyle = '#8BBC5A';
-        ctx.fillRect(cx-1, cy-17, 3, 3);
+        ctx.fillRect(cx-2, cy-17, 4, 4);
       }
     }
     
-    // draw chibi animal crossing character (cat-like)
-    function drawCharacter() {
-      // position: near the right side, below fence
-      const charX = 480, charY = 160;
-      // body
-      ctx.fillStyle = '#F7E2B0'; // cream fur
-      ctx.fillRect(charX-12, charY-5, 24, 28);
-      // head
-      ctx.fillStyle = '#F7E2B0';
-      ctx.fillRect(charX-14, charY-20, 28, 24);
-      // ears
-      ctx.fillStyle = '#E2BC7C';
-      ctx.fillRect(charX-16, charY-28, 8, 12);
-      ctx.fillRect(charX+8, charY-28, 8, 12);
-      // eyes
-      ctx.fillStyle = '#3A2A1A';
-      ctx.fillRect(charX-6, charY-12, 4, 4);
-      ctx.fillRect(charX+2, charY-12, 4, 4);
-      // blush
-      ctx.fillStyle = '#F2A2B3';
-      ctx.fillRect(charX-10, charY-8, 4, 2);
-      ctx.fillRect(charX+6, charY-8, 4, 2);
-      // mouth
-      ctx.fillStyle = '#5C3A1E';
-      ctx.fillRect(charX-2, charY-6, 4, 2);
-      // little watering can (pixel)
-      ctx.fillStyle = '#7F9F7A';
-      ctx.fillRect(charX+12, charY-10, 10, 6);
-      ctx.fillStyle = '#A8C99E';
-      ctx.fillRect(charX+18, charY-14, 4, 5);
-      
-      // speech bubble
+    // ANIMAL CROSSING CHARACTERS: two villagers + a bird
+    function drawCharacter(x, y, type) {
+      if (type === 'cat') {
+        // cat villager (cream)
+        ctx.fillStyle = '#F7E2B0';
+        ctx.fillRect(x-12, y-5, 24, 28);
+        ctx.fillRect(x-14, y-20, 28, 24);
+        ctx.fillStyle = '#E2BC7C';
+        ctx.fillRect(x-16, y-28, 8, 12);
+        ctx.fillRect(x+8, y-28, 8, 12);
+        ctx.fillStyle = '#3A2A1A';
+        ctx.fillRect(x-6, y-12, 4, 4);
+        ctx.fillRect(x+2, y-12, 4, 4);
+        ctx.fillStyle = '#F2A2B3';
+        ctx.fillRect(x-10, y-8, 4, 2);
+        ctx.fillRect(x+6, y-8, 4, 2);
+        ctx.fillStyle = '#5C3A1E';
+        ctx.fillRect(x-2, y-6, 4, 2);
+        // watering can
+        ctx.fillStyle = '#7F9F7A';
+        ctx.fillRect(x+12, y-10, 10, 6);
+        ctx.fillRect(x+18, y-14, 4, 5);
+      } else if (type === 'rabbit') {
+        // white rabbit
+        ctx.fillStyle = '#F7F0DE';
+        ctx.fillRect(x-10, y-4, 20, 24);
+        ctx.fillRect(x-12, y-18, 24, 22);
+        ctx.fillStyle = '#F5E2C1';
+        ctx.fillRect(x-14, y-26, 6, 12);
+        ctx.fillRect(x+8, y-26, 6, 12);
+        ctx.fillStyle = '#F0A0A0';
+        ctx.fillRect(x-4, y-10, 3, 3);
+        ctx.fillRect(x+2, y-10, 3, 3);
+        ctx.fillStyle = '#5C3A1E';
+        ctx.fillRect(x-1, y-5, 3, 2);
+      } else if (type === 'bird') {
+        // tiny yellow bird
+        ctx.fillStyle = '#F9E48B';
+        ctx.fillRect(x-5, y-8, 10, 12);
+        ctx.fillStyle = '#E8C35C';
+        ctx.fillRect(x-8, y-12, 6, 6);
+        ctx.fillRect(x+2, y-12, 6, 6);
+        ctx.fillStyle = '#3A2A1A';
+        ctx.fillRect(x-2, y-6, 2, 2);
+        ctx.fillRect(x+1, y-6, 2, 2);
+      }
+    }
+    
+    function drawScene() {
+      drawBackground();
+      drawPlots();
+      // main cat (left side)
+      drawCharacter(100, 280, 'cat');
+      // rabbit (right side)
+      drawCharacter(520, 290, 'rabbit');
+      // bird (flying near top right)
+      drawCharacter(550, 100, 'bird');
+      // speech bubbles
       ctx.fillStyle = '#FFFDE7';
-      ctx.fillRect(charX+25, charY-28, 45, 20);
+      ctx.fillRect(130, 250, 55, 20);
       ctx.fillStyle = '#3A5C34';
       ctx.font = '7px "Press Start 2P"';
-      ctx.fillText("focus!", charX+30, charY-16);
+      ctx.fillText("water!", 136, 262);
+      
+      ctx.fillStyle = '#FFFDE7';
+      ctx.fillRect(460, 260, 55, 20);
+      ctx.fillStyle = '#3A5C34';
+      ctx.fillText("grow!", 466, 272);
+      
+      // little hearts floating from characters
+      ctx.fillStyle = '#F2A2B3';
+      ctx.fillRect(125, 265, 4, 4);
+      ctx.fillRect(475, 275, 4, 4);
     }
     
     function drawCanvas() {
-      drawBackground();
-      drawPlots();
-      drawCharacter();
-      // update plant count display
-      const grownCount = gardenStages.filter(s => s === 3).length;
-      const total = TOTAL_PLANTS;
-      const counterSpan = document.querySelector('.controls span');
-      if (counterSpan) counterSpan.innerHTML = `🌿 grown fruit: ${grownCount}/${total}`;
+      drawScene();
+      updateFruitCounter();
     }
     
-    // ---------- TIMER LOGIC ----------
+    // ---------- TIMER ----------
     let timeLeft = 25 * 60;
     let timerInterval = null;
     let isRunning = false;
@@ -433,8 +505,7 @@
     
     function completePomodoro() {
       if (timeLeft === 0) {
-        const success = waterRandomPlant();
-        // reset timer to 25:00 but not auto-start
+        waterRandomPlant();
         timeLeft = 25 * 60;
         updateTimerDisplay();
         if (timerInterval) {
@@ -442,9 +513,21 @@
           timerInterval = null;
           isRunning = false;
         }
-        // visual feedback: flash canvas
-        canvas.style.filter = 'brightness(1.2)';
-        setTimeout(() => canvas.style.filter = '', 200);
+        // flash white + hearts effect
+        canvas.style.filter = 'brightness(1.1)';
+        setTimeout(() => canvas.style.filter = '', 150);
+        // add temporary floating heart
+        const heartDiv = document.createElement('div');
+        heartDiv.className = 'floating-deco';
+        heartDiv.style.position = 'fixed';
+        heartDiv.style.left = '50%';
+        heartDiv.style.top = '50%';
+        heartDiv.innerHTML = '💗';
+        heartDiv.style.fontSize = '2rem';
+        heartDiv.style.animation = 'floatAround 1s ease-out';
+        heartDiv.style.pointerEvents = 'none';
+        document.body.appendChild(heartDiv);
+        setTimeout(() => heartDiv.remove(), 1000);
       }
     }
     
@@ -464,7 +547,6 @@
         }
       }, 1000);
     }
-    
     function pauseTimer() {
       if (timerInterval) {
         clearInterval(timerInterval);
@@ -472,7 +554,6 @@
         isRunning = false;
       }
     }
-    
     function resetTimer() {
       pauseTimer();
       timeLeft = 25 * 60;
@@ -482,13 +563,8 @@
     startBtn.addEventListener('click', startTimer);
     pauseBtn.addEventListener('click', pauseTimer);
     resetBtn.addEventListener('click', resetTimer);
+    document.getElementById('resetGardenBtn').addEventListener('click', () => resetGarden());
     
-    const resetGardenBtn = document.getElementById('resetGardenBtn');
-    resetGardenBtn.addEventListener('click', () => {
-      resetGarden();
-    });
-    
-    // initial load
     loadGarden();
     updateTimerDisplay();
   })();
