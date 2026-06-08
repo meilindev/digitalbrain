@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>🌸 sarah · soft & curious</title>
-  <!-- both theme fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=Marcellus&display=swap" rel="stylesheet">
   <style id="theme-style">
     /* DEFAULT THEME: SAGE CUTESY */
@@ -96,9 +95,7 @@
       backdrop-filter: blur(4px);
       transition: 0.2s;
     }
-    .theme-toggle:hover {
-      transform: scale(0.97);
-    }
+    .theme-toggle:hover { transform: scale(0.97); }
 
     /* WIND HORSE THEME (overrides) */
     body.windhorse {
@@ -128,8 +125,15 @@
     body.windhorse .about h2 { color: #2C3A47; font-family: 'Marcellus', serif; border-left: none; }
     body.windhorse .card { background: #FFFCF5; border: 1px solid #EBE0CE; border-radius: 1.5rem; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
     body.windhorse .card h3 { color: #9E3C2C; font-family: 'Marcellus', serif; }
-    body.windhorse .blog-btn { background: #2C3A47; border: none; color: #FEF7E8; box-shadow: none; border-radius: 40px; }
+    body.windhorse .blog-btn {
+      background: #2C3A47;
+      border: none;
+      color: #FEF7E8;
+      box-shadow: none;
+      border-radius: 40px;
+    }
     body.windhorse .blog-btn:hover { background: #9E3C2C; }
+    /* ensure the pomodoro button (which also has class blog-btn) gets same style */
     body.windhorse .polaroid { background: #FFFCF5; border: 1px solid #EBE0CE; }
     body.windhorse .polaroid-placeholder { background: #EDE3D1; }
     body.windhorse .footer { background: #2C2418; color: #E3D5BE; border-top: none; }
@@ -169,7 +173,7 @@
 
     <div class="button-center">
       <a href="blog.html" class="blog-btn">📔 read my blog →</a>
-      <a href="garden.html" class="blog-btn" style="background:#E2EFD8;">🌱 pomodoro garden →</a>
+      <a href="pomodoro.html" class="blog-btn">pomodoro</a>
     </div>
 
     <div class="polaroid">
@@ -192,7 +196,6 @@
 </div>
 
 <script>
-  // Mood button (unchanged)
   const moodBtn = document.getElementById('moodButton');
   let moodState = 0;
   const moods = ['🌼 today\'s mood · happy 🌼', '🍃 dreamy & calm 🌿', '🌸 playful & creative 🧸', '🌙 cozy sleepy vibes ☁️'];
@@ -205,7 +208,6 @@
     });
   }
 
-  // Theme switcher (sage ↔ windhorse)
   const toggleBtn = document.getElementById('themeToggleBtn');
   const loadTheme = () => localStorage.getItem('siteTheme') === 'windhorse';
   const applyTheme = (windhorse) => {
