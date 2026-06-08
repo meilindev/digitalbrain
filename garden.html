@@ -2,572 +2,268 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>🌸 pomodoro animal crossing garden · cutesy pixel</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🍃 focus forest · pomodoro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      image-rendering: crisp-edges;
-      image-rendering: pixelated;
     }
 
     body {
-      background: #D0E7C0;  /* soft sage background */
-      font-family: 'Press Start 2P', 'Courier New', monospace;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       min-height: 100vh;
+      background: linear-gradient(145deg, #DDEAD4 0%, #C2D5B3 100%);
+      font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 1.5rem;
       position: relative;
-      overflow-x: hidden;
     }
 
-    /* floating stars & hearts */
-    .floating-deco {
+    /* floating animal crossing characters (simple & cute) */
+    .ac-character {
       position: fixed;
+      font-size: 3rem;
+      filter: drop-shadow(0 4px 6px rgba(60, 50, 30, 0.15));
       pointer-events: none;
-      font-size: 1.2rem;
-      animation: floatAround 8s infinite ease-in-out;
-      z-index: 10;
+      z-index: 1;
     }
-    @keyframes floatAround {
-      0% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
-      50% { transform: translateY(-20px) rotate(10deg); opacity: 1; }
-      100% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
-    }
-    /* random positions for decoration */
-    .star1 { top: 10%; left: 5%; animation-duration: 6s; }
-    .star2 { top: 20%; right: 3%; animation-duration: 7s; }
-    .heart1 { bottom: 15%; left: 8%; animation-duration: 5s; font-size: 1.5rem; }
-    .heart2 { top: 40%; right: 10%; animation-duration: 9s; }
-    .sparkle1 { bottom: 30%; left: 85%; animation-duration: 6.5s; }
 
-    /* main game window */
-    .game-container {
-      max-width: 800px;
+    /* different positions */
+    .char1 { bottom: 8%; left: 5%; }
+    .char2 { top: 12%; right: 6%; }
+    .char3 { bottom: 20%; right: 8%; }
+    .char4 { top: 25%; left: 3%; }
+
+    /* timer card */
+    .timer-card {
+      background: rgba(254, 252, 245, 0.92);
+      backdrop-filter: blur(2px);
+      border-radius: 56px;
+      padding: 2.5rem 2rem;
+      max-width: 500px;
       width: 100%;
-      background: #FFF8ED;  /* warm cream */
-      border: 5px solid #A8CF9E;
-      box-shadow: 10px 10px 0 #6A8E5C;
-      border-radius: 0;
-      position: relative;
+      text-align: center;
+      box-shadow: 0 25px 40px -12px rgba(50, 40, 20, 0.25);
+      border: 1px solid rgba(255, 255, 245, 0.6);
+      transition: all 0.2s ease;
       z-index: 2;
     }
 
-    .header {
-      background: #F2EFD0;
-      padding: 1rem;
-      text-align: center;
-      border-bottom: 3px solid #A8CF9E;
-    }
-
-    .back-home {
-      display: inline-block;
-      background: #FCE8D5;
-      border: 2px solid #A8CF9E;
-      padding: 0.3rem 0.8rem;
-      text-decoration: none;
-      font-size: 0.55rem;
-      color: #5C7A4A;
-      font-family: inherit;
-      box-shadow: 3px 3px 0 #A8CF9E;
-      transition: 0.05s linear;
-      margin-bottom: 0.5rem;
-    }
-    .back-home:active {
-      transform: translate(2px, 2px);
-      box-shadow: 1px 1px 0 #A8CF9E;
-    }
-
-    h1 {
-      font-size: 0.9rem;
-      color: #6A8E5C;
-      letter-spacing: 1px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    /* canvas area */
-    .garden-canvas-wrapper {
-      padding: 1rem;
-      background: #EADFB8;
-      display: flex;
-      justify-content: center;
-    }
-    canvas {
-      display: block;
-      margin: 0 auto;
-      box-shadow: 6px 6px 0 #A8CF9E;
-      image-rendering: crisp-edges;
-      image-rendering: pixelated;
-      width: 100%;
-      height: auto;
-      background: #BCDA9A;
-    }
-
-    /* timer panel - pastel */
-    .timer-panel {
-      background: #FCE8D5;  /* pastel peach */
-      margin: 1rem;
-      padding: 1rem;
-      border: 3px solid #A8CF9E;
-      box-shadow: inset 0 0 0 2px #FFF2E0, 0 4px 0 #6A8E5C;
-    }
-    .timer-display {
-      font-size: 1.5rem;
-      text-align: center;
-      background: #2C3E2B;
-      color: #E2F0D6;
-      padding: 0.5rem;
-      font-family: 'Press Start 2P', monospace;
-      letter-spacing: 3px;
+    .slogan {
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #7B9A6B;
+      font-weight: 500;
       margin-bottom: 1rem;
-      border-radius: 0;
     }
-    .timer-buttons {
+
+    .timer-display {
+      font-size: 5rem;
+      font-weight: 600;
+      font-feature-settings: "tnum";
+      font-variant-numeric: tabular-nums;
+      color: #2C3E2B;
+      background: #FEFCF5;
+      padding: 0.5rem 1rem;
+      border-radius: 80px;
+      display: inline-block;
+      width: auto;
+      min-width: 280px;
+      margin: 1rem 0;
+      box-shadow: inset 0 1px 3px #CBDBC0, 0 4px 8px rgba(0,0,0,0.02);
+      font-family: 'Inter', 'Helvetica Neue', monospace;
+    }
+
+    .button-group {
       display: flex;
-      gap: 0.8rem;
+      gap: 1rem;
       justify-content: center;
       flex-wrap: wrap;
+      margin: 1.5rem 0 1rem;
     }
-    .timer-btn {
-      background: #E2F0D6;
+
+    .btn {
+      background: #EFF6EB;
       border: none;
-      font-family: 'Press Start 2P', monospace;
-      font-size: 0.65rem;
-      padding: 0.5rem 1rem;
-      color: #4A6B3F;
-      cursor: pointer;
-      box-shadow: 3px 3px 0 #6A8E5C;
-      transition: 0.05s linear;
-    }
-    .timer-btn:active {
-      transform: translate(2px, 2px);
-      box-shadow: 1px 1px 0 #6A8E5C;
-    }
-
-    /* controls row - pastel background */
-    .controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 0.5rem 1rem 0.8rem 1rem;
-      flex-wrap: wrap;
-      gap: 10px;
-      background: #EADFB8;  /* pastel sand */
-      padding: 0.5rem 1rem;
-      border: 2px solid #A8CF9E;
-    }
-    .controls span {
-      font-size: 0.55rem;
-      color: #4A6B3F;
-      background: none;
-      padding: 0;
-    }
-    .reset-garden {
-      background: #FCE8D5;
-      border: 2px solid #A8CF9E;
-      padding: 0.3rem 0.8rem;
+      padding: 0.7rem 1.5rem;
+      border-radius: 60px;
       font-family: inherit;
-      font-size: 0.55rem;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: #5F7C53;
       cursor: pointer;
-      color: #5C7A4A;
-      box-shadow: 2px 2px 0 #A8CF9E;
+      transition: 0.2s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
-    .info-text {
-      background: #FCE8D5;
-      padding: 0.6rem;
-      text-align: center;
-      font-size: 0.45rem;
-      margin: 0 1rem 1rem 1rem;
-      border: 1px solid #A8CF9E;
-      color: #5C7A4A;
-      line-height: 1.4;
+    .btn-primary {
+      background: #8BAF7A;
+      color: white;
+      box-shadow: 0 4px 8px rgba(100, 80, 40, 0.1);
     }
 
-    .footer {
-      background: #E2EEC9;
-      text-align: center;
-      padding: 0.7rem;
-      font-size: 0.45rem;
-      border-top: 3px solid #A8CF9E;
-      color: #6A8E5C;
+    .btn-primary:hover {
+      background: #7A9E68;
+      transform: translateY(-2px);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      background: #E2EFD8;
+    }
+
+    .session-counter {
+      margin-top: 1.8rem;
+      font-size: 0.8rem;
+      color: #6C8760;
+      border-top: 1px solid #E0EDD6;
+      padding-top: 1.2rem;
+      display: inline-block;
+      width: auto;
+    }
+
+    .counter-number {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #5F7C53;
+      margin-left: 0.3rem;
+    }
+
+    .footer-note {
+      margin-top: 1.2rem;
+      font-size: 0.7rem;
+      color: #8DAF7A;
     }
 
     @media (max-width: 550px) {
-      .timer-display { font-size: 1rem; }
-      .timer-btn { font-size: 0.5rem; }
-      h1 { font-size: 0.7rem; }
-      .controls span { font-size: 0.45rem; }
+      .timer-display {
+        font-size: 3rem;
+        min-width: 200px;
+      }
+      .ac-character {
+        font-size: 2rem;
+      }
+      .timer-card {
+        padding: 1.8rem 1.2rem;
+      }
     }
   </style>
 </head>
 <body>
-<div class="floating-deco star1">⭐️</div>
-<div class="floating-deco star2">✨</div>
-<div class="floating-deco heart1">💖</div>
-<div class="floating-deco heart2">🌸</div>
-<div class="floating-deco sparkle1">🌟</div>
 
-<div class="game-container">
-  <div class="header">
-    <a href="index.html" class="back-home">← back home</a>
-    <h1>
-      🌾 POMODORO VILLAGE GARDEN 🌸
-      <span>🎀</span>
-    </h1>
-    <p style="font-size:0.45rem; margin-top:6px;">each focus session = water a random plant → it grows!</p>
-  </div>
+  <!-- Animal Crossing characters as emoji + text (cute, simple, recognizable) -->
+  <div class="ac-character char1" title="Isabelle">🐶📋✨</div>
+  <div class="ac-character char2" title="Tom Nook">🦝🪙🍃</div>
+  <div class="ac-character char3" title="K.K. Slider">🐕🎸🎵</div>
+  <div class="ac-character char4" title="Celeste">🦉⭐️🌙</div>
 
-  <div class="garden-canvas-wrapper">
-    <canvas id="gardenCanvas" width="640" height="450" style="width:100%; height:auto; max-width:640px; aspect-ratio:640/450"></canvas>
-  </div>
-
-  <div class="timer-panel">
-    <div class="timer-display" id="timerDisplay">25:00</div>
-    <div class="timer-buttons">
-      <button class="timer-btn" id="startBtn">▶ START</button>
-      <button class="timer-btn" id="pauseBtn">⏸ PAUSE</button>
-      <button class="timer-btn" id="resetBtn">⟳ RESET</button>
+  <div class="timer-card">
+    <div class="slogan">🌸 work · rest · repeat 🌸</div>
+    <div class="timer-display" id="timer">25:00</div>
+    <div class="button-group">
+      <button class="btn btn-primary" id="startBtn">▶ start</button>
+      <button class="btn" id="pauseBtn">⏸ pause</button>
+      <button class="btn" id="resetBtn">⟳ reset</button>
+    </div>
+    <div class="session-counter">
+      🍅 pomodoros completed today · <span class="counter-number" id="sessionCount">0</span>
+    </div>
+    <div class="footer-note">
+      🍃 focus with friends — each completed session grows your island spirit
     </div>
   </div>
 
-  <div class="controls">
-    <span>🌱 grown fruit: <span id="fruitCount">0</span>/16</span>
-    <button class="reset-garden" id="resetGardenBtn">🗑️ clear garden</button>
-  </div>
-  <div class="info-text">
-    💾 auto-saved · each completed pomodoro grows a random plant one stage (seed → sprout → flower → fruit)<br>
-    🍃 extra flowers & animal friends make the garden cozy!
-  </div>
-  <div class="footer">
-    🎮 pixel animal crossing vibe · pastel sage & hearts · keep growing
-  </div>
-</div>
-
-<script>
-  (function() {
-    // ---------- GARDEN DATA ----------
-    const GRID_SIZE = 4;
-    const TOTAL_PLANTS = GRID_SIZE * GRID_SIZE;
-    let gardenStages = new Array(TOTAL_PLANTS).fill(0); // 0=seed,1=sprout,2=flower,3=fruit
-    const GARDEN_KEY = 'ac_pomodoro_garden';
-    
-    function loadGarden() {
-      const saved = localStorage.getItem(GARDEN_KEY);
-      if (saved) gardenStages = JSON.parse(saved);
-      else gardenStages.fill(0);
-      drawCanvas();
-      updateFruitCounter();
-    }
-    function saveGarden() {
-      localStorage.setItem(GARDEN_KEY, JSON.stringify(gardenStages));
-      updateFruitCounter();
-    }
-    function updateFruitCounter() {
-      const fruitCount = gardenStages.filter(s => s === 3).length;
-      document.getElementById('fruitCount').innerText = fruitCount;
-    }
-    
-    function waterRandomPlant() {
-      const incomplete = [];
-      for (let i = 0; i < TOTAL_PLANTS; i++) {
-        if (gardenStages[i] < 3) incomplete.push(i);
-      }
-      if (incomplete.length === 0) {
-        const info = document.querySelector('.info-text');
-        const original = info.innerHTML;
-        info.innerHTML = '🎉 GARDEN FULL OF FRUIT! Clear to start again 🎉';
-        setTimeout(() => info.innerHTML = original, 3000);
-        return false;
-      }
-      const idx = incomplete[Math.floor(Math.random() * incomplete.length)];
-      gardenStages[idx] = Math.min(gardenStages[idx] + 1, 3);
-      saveGarden();
-      drawCanvas();
-      return true;
-    }
-    
-    function resetGarden() {
-      gardenStages.fill(0);
-      saveGarden();
-      drawCanvas();
-    }
-    
-    // ---------- CANVAS DRAWING (pixel art, more characters & flowers) ----------
-    const canvas = document.getElementById('gardenCanvas');
-    const ctx = canvas.getContext('2d');
-    ctx.imageSmoothingEnabled = false;
-    const W = 640, H = 450;
-    canvas.width = W; canvas.height = H;
-    
-    // background
-    function drawBackground() {
-      // sky
-      ctx.fillStyle = '#DCF2EA';
-      ctx.fillRect(0, 0, W, 140);
-      // grass
-      ctx.fillStyle = '#BCDA9A';
-      ctx.fillRect(0, 140, W, H-140);
-      // clouds
-      ctx.fillStyle = '#FFF9E8';
-      ctx.fillRect(50, 40, 55, 22);
-      ctx.fillRect(75, 25, 40, 22);
-      ctx.fillRect(480, 60, 60, 22);
-      ctx.fillRect(500, 45, 40, 20);
-      // sun (pixel)
-      ctx.fillStyle = '#F9E7B3';
-      ctx.fillRect(560, 20, 30, 30);
-      ctx.fillStyle = '#FFD966';
-      ctx.fillRect(565, 25, 20, 20);
-      
-      // fence
-      ctx.fillStyle = '#D4B88C';
-      for (let x = 15; x < W; x += 55) {
-        ctx.fillRect(x, 130, 7, 25);
-        ctx.fillRect(x+2, 138, 3, 12);
-      }
-      
-      // decorative flowers on grass (static)
-      const flowerPositions = [[30,180], [90,220], [550,190], [600,280], [50,320], [580,380]];
-      flowerPositions.forEach(([x,y]) => {
-        ctx.fillStyle = '#F4B3C2';
-        ctx.fillRect(x, y, 5, 5);
-        ctx.fillStyle = '#F7D695';
-        ctx.fillRect(x+1, y+1, 3, 3);
-        ctx.fillStyle = '#6B8C5C';
-        ctx.fillRect(x+2, y-2, 2, 4);
-      });
-    }
-    
-    // soil plots
-    const plotW = 68, plotH = 48;
-    const startX = 45, startY = 190;
-    const spacingX = 12, spacingY = 12;
-    
-    function drawPlots() {
-      for (let row = 0; row < GRID_SIZE; row++) {
-        for (let col = 0; col < GRID_SIZE; col++) {
-          const x = startX + col * (plotW + spacingX);
-          const y = startY + row * (plotH + spacingY);
-          // soil
-          ctx.fillStyle = '#8B5E3C';
-          ctx.fillRect(x, y, plotW, plotH);
-          ctx.strokeStyle = '#5C3A1E';
-          ctx.lineWidth = 2;
-          ctx.strokeRect(x+1, y+1, plotW-2, plotH-2);
-          
-          const idx = row * GRID_SIZE + col;
-          const stage = gardenStages[idx];
-          const cx = x + plotW/2;
-          const bottomY = y + plotH - 6;
-          
-          if (stage === 0) {
-            // seed
-            ctx.fillStyle = '#5C3A1E';
-            ctx.fillRect(cx-3, bottomY-3, 6, 4);
-          } else {
-            drawPlant(cx, bottomY, stage);
-          }
-        }
-      }
-    }
-    
-    function drawPlant(cx, cy, stage) {
-      if (stage === 1) { // sprout
-        ctx.fillStyle = '#6B8C5C';
-        ctx.fillRect(cx-3, cy-10, 3, 12);
-        ctx.fillRect(cx+1, cy-8, 3, 10);
-        ctx.fillStyle = '#A8D48A';
-        ctx.fillRect(cx-3, cy-12, 3, 3);
-        ctx.fillRect(cx+1, cy-10, 3, 3);
-      } else if (stage === 2) { // flower
-        ctx.fillStyle = '#6B8C5C';
-        ctx.fillRect(cx-2, cy-12, 4, 14);
-        ctx.fillStyle = '#F4B3C2';
-        ctx.fillRect(cx-5, cy-16, 3, 5);
-        ctx.fillRect(cx+2, cy-16, 3, 5);
-        ctx.fillRect(cx-1, cy-18, 3, 5);
-        ctx.fillStyle = '#F7D695';
-        ctx.fillRect(cx-1, cy-14, 3, 3);
-      } else if (stage === 3) { // fruit
-        ctx.fillStyle = '#6B8C5C';
-        ctx.fillRect(cx-2, cy-10, 4, 12);
-        ctx.fillStyle = '#E67E5E';
-        ctx.fillRect(cx-5, cy-16, 10, 9);
-        ctx.fillStyle = '#8BBC5A';
-        ctx.fillRect(cx-2, cy-17, 4, 4);
-      }
-    }
-    
-    // ANIMAL CROSSING CHARACTERS: two villagers + a bird
-    function drawCharacter(x, y, type) {
-      if (type === 'cat') {
-        // cat villager (cream)
-        ctx.fillStyle = '#F7E2B0';
-        ctx.fillRect(x-12, y-5, 24, 28);
-        ctx.fillRect(x-14, y-20, 28, 24);
-        ctx.fillStyle = '#E2BC7C';
-        ctx.fillRect(x-16, y-28, 8, 12);
-        ctx.fillRect(x+8, y-28, 8, 12);
-        ctx.fillStyle = '#3A2A1A';
-        ctx.fillRect(x-6, y-12, 4, 4);
-        ctx.fillRect(x+2, y-12, 4, 4);
-        ctx.fillStyle = '#F2A2B3';
-        ctx.fillRect(x-10, y-8, 4, 2);
-        ctx.fillRect(x+6, y-8, 4, 2);
-        ctx.fillStyle = '#5C3A1E';
-        ctx.fillRect(x-2, y-6, 4, 2);
-        // watering can
-        ctx.fillStyle = '#7F9F7A';
-        ctx.fillRect(x+12, y-10, 10, 6);
-        ctx.fillRect(x+18, y-14, 4, 5);
-      } else if (type === 'rabbit') {
-        // white rabbit
-        ctx.fillStyle = '#F7F0DE';
-        ctx.fillRect(x-10, y-4, 20, 24);
-        ctx.fillRect(x-12, y-18, 24, 22);
-        ctx.fillStyle = '#F5E2C1';
-        ctx.fillRect(x-14, y-26, 6, 12);
-        ctx.fillRect(x+8, y-26, 6, 12);
-        ctx.fillStyle = '#F0A0A0';
-        ctx.fillRect(x-4, y-10, 3, 3);
-        ctx.fillRect(x+2, y-10, 3, 3);
-        ctx.fillStyle = '#5C3A1E';
-        ctx.fillRect(x-1, y-5, 3, 2);
-      } else if (type === 'bird') {
-        // tiny yellow bird
-        ctx.fillStyle = '#F9E48B';
-        ctx.fillRect(x-5, y-8, 10, 12);
-        ctx.fillStyle = '#E8C35C';
-        ctx.fillRect(x-8, y-12, 6, 6);
-        ctx.fillRect(x+2, y-12, 6, 6);
-        ctx.fillStyle = '#3A2A1A';
-        ctx.fillRect(x-2, y-6, 2, 2);
-        ctx.fillRect(x+1, y-6, 2, 2);
-      }
-    }
-    
-    function drawScene() {
-      drawBackground();
-      drawPlots();
-      // main cat (left side)
-      drawCharacter(100, 280, 'cat');
-      // rabbit (right side)
-      drawCharacter(520, 290, 'rabbit');
-      // bird (flying near top right)
-      drawCharacter(550, 100, 'bird');
-      // speech bubbles
-      ctx.fillStyle = '#FFFDE7';
-      ctx.fillRect(130, 250, 55, 20);
-      ctx.fillStyle = '#3A5C34';
-      ctx.font = '7px "Press Start 2P"';
-      ctx.fillText("water!", 136, 262);
-      
-      ctx.fillStyle = '#FFFDE7';
-      ctx.fillRect(460, 260, 55, 20);
-      ctx.fillStyle = '#3A5C34';
-      ctx.fillText("grow!", 466, 272);
-      
-      // little hearts floating from characters
-      ctx.fillStyle = '#F2A2B3';
-      ctx.fillRect(125, 265, 4, 4);
-      ctx.fillRect(475, 275, 4, 4);
-    }
-    
-    function drawCanvas() {
-      drawScene();
-      updateFruitCounter();
-    }
-    
-    // ---------- TIMER ----------
-    let timeLeft = 25 * 60;
-    let timerInterval = null;
+  <script>
+    // Timer state
+    let timeLeft = 25 * 60;  // 25 minutes in seconds
+    let timerId = null;
     let isRunning = false;
-    const timerDisplay = document.getElementById('timerDisplay');
+    let sessionsCompleted = 0;
+
+    // Load session count from localStorage
+    if (localStorage.getItem('pomodoroSessions')) {
+      sessionsCompleted = parseInt(localStorage.getItem('pomodoroSessions')) || 0;
+      document.getElementById('sessionCount').innerText = sessionsCompleted;
+    }
+
+    const timerDisplay = document.getElementById('timer');
     const startBtn = document.getElementById('startBtn');
     const pauseBtn = document.getElementById('pauseBtn');
     const resetBtn = document.getElementById('resetBtn');
-    
-    function updateTimerDisplay() {
-      const mins = Math.floor(timeLeft / 60);
-      const secs = timeLeft % 60;
-      timerDisplay.textContent = `${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+    const sessionSpan = document.getElementById('sessionCount');
+
+    function updateDisplay() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
-    
-    function completePomodoro() {
+
+    function saveSessionCount() {
+      localStorage.setItem('pomodoroSessions', sessionsCompleted);
+      sessionSpan.innerText = sessionsCompleted;
+    }
+
+    function completeSession() {
       if (timeLeft === 0) {
-        waterRandomPlant();
-        timeLeft = 25 * 60;
-        updateTimerDisplay();
-        if (timerInterval) {
-          clearInterval(timerInterval);
-          timerInterval = null;
-          isRunning = false;
-        }
-        // flash white + hearts effect
-        canvas.style.filter = 'brightness(1.1)';
-        setTimeout(() => canvas.style.filter = '', 150);
-        // add temporary floating heart
-        const heartDiv = document.createElement('div');
-        heartDiv.className = 'floating-deco';
-        heartDiv.style.position = 'fixed';
-        heartDiv.style.left = '50%';
-        heartDiv.style.top = '50%';
-        heartDiv.innerHTML = '💗';
-        heartDiv.style.fontSize = '2rem';
-        heartDiv.style.animation = 'floatAround 1s ease-out';
-        heartDiv.style.pointerEvents = 'none';
-        document.body.appendChild(heartDiv);
-        setTimeout(() => heartDiv.remove(), 1000);
+        sessionsCompleted++;
+        saveSessionCount();
+        // little alert? no, just update UI
+        // optional: flash the card or play a tiny sound (we skip sound for simplicity)
+        const card = document.querySelector('.timer-card');
+        card.style.transform = 'scale(0.98)';
+        setTimeout(() => card.style.transform = '', 200);
       }
     }
-    
-    function startTimer() {
-      if (timerInterval) return;
-      isRunning = true;
-      timerInterval = setInterval(() => {
-        if (timeLeft > 0) {
-          timeLeft--;
-          updateTimerDisplay();
-          if (timeLeft === 0) {
-            clearInterval(timerInterval);
-            timerInterval = null;
-            isRunning = false;
-            completePomodoro();
-          }
+
+    function tick() {
+      if (timeLeft > 0) {
+        timeLeft--;
+        updateDisplay();
+        if (timeLeft === 0) {
+          clearInterval(timerId);
+          timerId = null;
+          isRunning = false;
+          completeSession();
         }
-      }, 1000);
+      }
     }
+
+    function startTimer() {
+      if (isRunning) return;
+      if (timeLeft === 0) {
+        // if timer already at zero, reset to 25:00 before starting
+        timeLeft = 25 * 60;
+        updateDisplay();
+      }
+      isRunning = true;
+      timerId = setInterval(tick, 1000);
+    }
+
     function pauseTimer() {
-      if (timerInterval) {
-        clearInterval(timerInterval);
-        timerInterval = null;
+      if (timerId) {
+        clearInterval(timerId);
+        timerId = null;
         isRunning = false;
       }
     }
+
     function resetTimer() {
       pauseTimer();
       timeLeft = 25 * 60;
-      updateTimerDisplay();
+      updateDisplay();
     }
-    
+
     startBtn.addEventListener('click', startTimer);
     pauseBtn.addEventListener('click', pauseTimer);
     resetBtn.addEventListener('click', resetTimer);
-    document.getElementById('resetGardenBtn').addEventListener('click', () => resetGarden());
-    
-    loadGarden();
-    updateTimerDisplay();
-  })();
-</script>
+
+    // initial display
+    updateDisplay();
+  </script>
 </body>
 </html>
