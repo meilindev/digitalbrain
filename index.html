@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>🌸 hey, i'm sage</title>
-  <style>
+  <title>🌸 sarah · soft & curious</title>
+  <!-- both theme fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=Marcellus&display=swap" rel="stylesheet">
+  <style id="theme-style">
+    /* DEFAULT THEME: SAGE CUTESY */
     * {
       margin: 0;
       padding: 0;
@@ -17,6 +20,7 @@
       color: #2C3E2B;
       line-height: 1.5;
       padding: 1.5rem;
+      transition: all 0.2s;
     }
 
     .container {
@@ -48,211 +52,101 @@
       box-shadow: 0 8px 14px #C2D5B380;
       transition: transform 0.2s;
     }
-    .avatar:hover {
-      transform: scale(1.02);
-    }
+    .avatar:hover { transform: scale(1.02); }
 
-    h1 {
-      font-size: 2.6rem;
-      font-weight: 600;
-      letter-spacing: -0.3px;
-      color: #5F7C53;
-      margin-bottom: 0.25rem;
-    }
+    h1 { font-size: 2.6rem; font-weight: 600; letter-spacing: -0.3px; color: #5F7C53; margin-bottom: 0.25rem; }
+    .tagline { font-size: 1.2rem; background: #EFF6EB; display: inline-block; padding: 0.3rem 1.2rem; border-radius: 60px; color: #4A6641; }
 
-    .tagline {
-      font-size: 1.2rem;
-      background: #EFF6EB;
-      display: inline-block;
-      padding: 0.3rem 1.2rem;
-      border-radius: 60px;
-      color: #4A6641;
-      font-weight: 450;
-    }
+    .content { padding: 2rem 2rem 1.8rem 2rem; }
+    .about { background: #F9FCF7; border-radius: 32px; padding: 1.8rem; margin-bottom: 2rem; border: 1px solid #E3EFDA; }
+    .about h2 { font-size: 1.8rem; font-weight: 550; display: flex; align-items: center; gap: 8px; color: #5F7C53; margin-bottom: 1rem; }
+    .cute-grid { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 2rem; }
+    .card { flex: 1; min-width: 180px; background: white; border-radius: 32px; padding: 1.4rem 1.2rem; box-shadow: 0 10px 18px -6px #CBDBC07F; border: 1px solid #E0EDD6; transition: all 0.25s ease; }
+    .card:hover { transform: translateY(-5px); }
+    .card h3 { font-size: 1.4rem; font-weight: 550; display: flex; align-items: center; gap: 8px; color: #6D8F5E; margin-bottom: 1rem; }
+    .card ul { list-style: none; }
+    .card li { margin-bottom: 0.7rem; display: flex; align-items: center; gap: 10px; }
+    .mood-btn { background: #EFF6EB; border: 1px solid #CDE0C1; padding: 0.5rem 1rem; border-radius: 48px; font-family: inherit; color: #4F6943; cursor: pointer; margin-top: 1rem; display: inline-flex; align-items: center; gap: 6px; }
+    .blog-btn { background: #DDEAD4; border: 2px solid #C2D5B3; padding: 0.7rem 1.4rem; border-radius: 60px; font-size: 1rem; font-weight: 550; font-family: inherit; color: #4B693D; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 3px 6px #C2D5B380; transition: 0.2s; }
+    .blog-btn:hover { background: #CFE2C4; transform: translateY(-2px); }
+    .polaroid { background: white; border-radius: 28px; padding: 1.2rem; text-align: center; margin-bottom: 2rem; border: 1px solid #E7F1E0; }
+    .polaroid-placeholder { background: #E2ECDA; border-radius: 24px; height: 160px; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #7B9A6B; }
+    .footer { background: #F6FBF2; padding: 1.5rem 2rem; text-align: center; border-top: 2px solid #E0EDD6; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.85rem; }
+    .social-icons { display: flex; gap: 1.2rem; }
+    .social-icons a { text-decoration: none; font-size: 1.3rem; color: #7F9C6E; transition: 0.2s; }
+    .button-center { text-align: center; margin: 1.5rem 0; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    hr { border: none; height: 2px; background: linear-gradient(90deg, #DDEAD4, #FEFCF5, #DDEAD4); margin: 1rem 0; }
+    @media (max-width: 660px) { body { padding: 0.8rem; } .content { padding: 1.5rem; } h1 { font-size: 2rem; } .cute-grid { flex-direction: column; } .footer { flex-direction: column; } }
 
-    .content {
-      padding: 2rem 2rem 1.8rem 2rem;
-    }
-
-    .about {
-      background: #F9FCF7;
-      border-radius: 32px;
-      padding: 1.8rem;
-      margin-bottom: 2rem;
-      border: 1px solid #E3EFDA;
-    }
-
-    .about h2 {
-      font-size: 1.8rem;
-      font-weight: 550;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #5F7C53;
-      margin-bottom: 1rem;
-    }
-
-    .cute-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .card {
-      flex: 1;
-      min-width: 180px;
+    /* theme toggle button */
+    .theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
       background: white;
-      border-radius: 32px;
-      padding: 1.4rem 1.2rem;
-      box-shadow: 0 10px 18px -6px #CBDBC07F;
-      transition: all 0.25s ease;
-      border: 1px solid #E0EDD6;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .card h3 {
-      font-size: 1.4rem;
-      font-weight: 550;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #6D8F5E;
-    }
-
-    .card ul {
-      list-style: none;
-    }
-    .card li {
-      margin-bottom: 0.7rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .mood-btn {
-      background: #EFF6EB;
       border: 1px solid #CDE0C1;
+      border-radius: 40px;
       padding: 0.5rem 1rem;
-      border-radius: 48px;
-      font-size: 0.9rem;
       font-family: inherit;
-      color: #4F6943;
+      font-size: 0.8rem;
+      font-weight: 500;
       cursor: pointer;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      backdrop-filter: blur(4px);
       transition: 0.2s;
-      margin-top: 1rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
     }
-    .mood-btn:hover {
-      background: #E2EFD8;
+    .theme-toggle:hover {
       transform: scale(0.97);
     }
 
-    /* blog button style */
-    .blog-btn {
-      background: #DDEAD4;
-      border: 2px solid #C2D5B3;
-      padding: 0.7rem 1.4rem;
-      border-radius: 60px;
-      font-size: 1rem;
-      font-weight: 550;
-      font-family: inherit;
-      color: #4B693D;
-      cursor: pointer;
-      transition: 0.2s;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 3px 6px #C2D5B380;
+    /* WIND HORSE THEME (overrides) */
+    body.windhorse {
+      background-color: #FEF7E8;
+      font-family: 'Inter', sans-serif;
+      color: #2C2418;
     }
-    .blog-btn:hover {
-      background: #CFE2C4;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px #B2CA9F80;
+    body.windhorse .container {
+      background: transparent;
+      box-shadow: none;
+      border-radius: 0;
     }
-
-    .polaroid {
-      background: white;
-      border-radius: 28px;
-      padding: 1.2rem 1.2rem 1.8rem 1.2rem;
-      text-align: center;
-      margin-bottom: 2rem;
-      border: 1px solid #E7F1E0;
+    body.windhorse .header {
+      background: #FEF7E8;
+      border-bottom: 2px solid #D9C7A7;
+      border-radius: 0;
+      padding: 2rem 2rem 1rem;
     }
-    .polaroid-placeholder {
-      background: #E2ECDA;
-      border-radius: 24px;
-      height: 160px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      color: #7B9A6B;
+    body.windhorse .avatar {
+      background: #E7DBC4;
+      box-shadow: none;
+      border-radius: 50%;
     }
-
-    .footer {
-      background: #F6FBF2;
-      padding: 1.5rem 2rem;
-      text-align: center;
-      border-top: 2px solid #E0EDD6;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      font-size: 0.85rem;
-    }
-    .social-icons {
-      display: flex;
-      gap: 1.2rem;
-    }
-    .social-icons a {
-      text-decoration: none;
-      font-size: 1.3rem;
-      color: #7F9C6E;
-      transition: 0.2s;
-    }
-    .social-icons a:hover {
-      color: #4B693D;
-    }
-
-    @media (max-width: 660px) {
-      body { padding: 0.8rem; }
-      .content { padding: 1.5rem; }
-      h1 { font-size: 2rem; }
-      .cute-grid { flex-direction: column; }
-      .footer { flex-direction: column; }
-    }
-    hr {
-      border: none;
-      height: 2px;
-      background: linear-gradient(90deg, #DDEAD4, #FEFCF5, #DDEAD4);
-      margin: 1rem 0;
-    }
-    .button-center {
-      text-align: center;
-      margin: 1.5rem 0 1rem;
-    }
+    body.windhorse h1 { color: #2C3A47; font-family: 'Marcellus', serif; font-size: 2.2rem; }
+    body.windhorse .tagline { background: #EDE3D1; color: #9E3C2C; border-left: 3px solid #9E3C2C; border-radius: 0; padding-left: 1rem; }
+    body.windhorse .about { background: #FFFCF5; border: 1px solid #EBE0CE; border-radius: 1.5rem; }
+    body.windhorse .about h2 { color: #2C3A47; font-family: 'Marcellus', serif; border-left: none; }
+    body.windhorse .card { background: #FFFCF5; border: 1px solid #EBE0CE; border-radius: 1.5rem; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+    body.windhorse .card h3 { color: #9E3C2C; font-family: 'Marcellus', serif; }
+    body.windhorse .blog-btn { background: #2C3A47; border: none; color: #FEF7E8; box-shadow: none; border-radius: 40px; }
+    body.windhorse .blog-btn:hover { background: #9E3C2C; }
+    body.windhorse .polaroid { background: #FFFCF5; border: 1px solid #EBE0CE; }
+    body.windhorse .polaroid-placeholder { background: #EDE3D1; }
+    body.windhorse .footer { background: #2C2418; color: #E3D5BE; border-top: none; }
+    body.windhorse .footer a, body.windhorse .social-icons a { color: #E3D5BE; }
+    body.windhorse .mood-btn { background: #EDE3D1; border-color: #CBBFAA; color: #2C3A47; }
   </style>
 </head>
 <body>
+<button class="theme-toggle" id="themeToggleBtn">🎨 switch to wind horse</button>
+
 <div class="container">
- <div class="header">
-  <div class="avatar">🍃</div>
-  <h1>hi, i'm <span style="color:#8BAF7A;">sarah</span></h1>
-  <div class="tagline">
-    ✨ soft & curious · design + code ✨
+  <div class="header">
+    <div class="avatar">🍃</div>
+    <h1>hi, i'm <span style="color:#8BAF7A;">sarah</span></h1>
+    <div class="tagline">✨ soft & curious · design + code ✨</div>
+    <div style="margin-top: 0.8rem;"><a href="about.html" style="background: #EFF6EB; padding: 0.3rem 1rem; border-radius: 60px; text-decoration: none; font-size: 0.85rem; color: #5F7C53;">📖 about & cv →</a></div>
   </div>
-  <div style="margin-top: 0.8rem;">
-    <a href="about.html" style="background: #EFF6EB; padding: 0.3rem 1rem; border-radius: 60px; text-decoration: none; font-size: 0.85rem; color: #5F7C53; font-weight: 500;">📖 about & cv →</a>
-  </div>
-</div>
 
   <div class="content">
     <div class="about">
@@ -264,39 +158,26 @@
     <div class="cute-grid">
       <div class="card">
         <h3>🍰 favorites</h3>
-        <ul>
-          <li>📖 studio ghibli soundtracks</li>
-          <li>☁️ cloud watching & slow walks</li>
-          <li>🧸 plushie collecting</li>
-          <li>🍵 oat milk chai / sage tea</li>
-        </ul>
+        <ul><li>📖 studio ghibli soundtracks</li><li>☁️ cloud watching & slow walks</li><li>🧸 plushie collecting</li><li>🍵 oat milk chai / sage tea</li></ul>
       </div>
       <div class="card">
         <h3>✨ currently</h3>
-        <ul>
-          <li>🎧 playlist: “sunlit mornings”</li>
-          <li>📚 reading: "braiding sweetgrass"</li>
-          <li>🧸 building a little zine</li>
-          <li>🌸 learning hiragana</li>
-        </ul>
+        <ul><li>🎧 playlist: “sunlit mornings”</li><li>📚 reading: "braiding sweetgrass"</li><li>🧸 building a little zine</li><li>🌸 learning hiragana</li></ul>
         <button class="mood-btn" id="moodButton">🌼 today's mood · happy 🌼</button>
       </div>
     </div>
 
-    <!-- 🌟 BLOG BUTTON (added here) 🌟 -->
-
-    <div class="button-center" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-  <a href="blog.html" class="blog-btn">📔 read my blog →</a>
-  <a href="garden.html" class="blog-btn" style="background:#E2EFD8;">🌱 focus garden →</a>
-</div>
+    <div class="button-center">
+      <a href="blog.html" class="blog-btn">📔 read my blog →</a>
+      <a href="garden.html" class="blog-btn" style="background:#E2EFD8;">🌱 pomodoro garden →</a>
+    </div>
 
     <div class="polaroid">
       <div class="polaroid-placeholder">🐻‍❄️ 📸 ✨</div>
       <p>a snapshot of my desk — always with a plant and a little friend 💚</p>
     </div>
-
     <hr>
-    <div style="text-align: center;"><span class="sparkle">✧ ˖ ° 𐐪𐑂 ♡ 𐐪𐑂 ° ˖ ✧</span></div>
+    <div style="text-align: center;"><span>✧ ˖ ° 𐐪𐑂 ♡ 𐐪𐑂 ° ˖ ✧</span></div>
   </div>
 
   <div class="footer">
@@ -306,20 +187,40 @@
       <a href="#" aria-label="github">🐙</a>
       <a href="#" aria-label="email">✉️</a>
       <a href="#" aria-label="bluesky">🦋</a>
-      <a href="blog.html" aria-label="blog">📔</a>
     </div>
   </div>
 </div>
 
 <script>
+  // Mood button (unchanged)
   const moodBtn = document.getElementById('moodButton');
   let moodState = 0;
   const moods = ['🌼 today\'s mood · happy 🌼', '🍃 dreamy & calm 🌿', '🌸 playful & creative 🧸', '🌙 cozy sleepy vibes ☁️'];
-  moodBtn.addEventListener('click', () => {
-    moodState = (moodState + 1) % moods.length;
-    moodBtn.textContent = moods[moodState];
-    moodBtn.style.transform = 'scale(0.97)';
-    setTimeout(() => { moodBtn.style.transform = ''; }, 120);
+  if(moodBtn) {
+    moodBtn.addEventListener('click', () => {
+      moodState = (moodState + 1) % moods.length;
+      moodBtn.textContent = moods[moodState];
+      moodBtn.style.transform = 'scale(0.97)';
+      setTimeout(() => { moodBtn.style.transform = ''; }, 120);
+    });
+  }
+
+  // Theme switcher (sage ↔ windhorse)
+  const toggleBtn = document.getElementById('themeToggleBtn');
+  const loadTheme = () => localStorage.getItem('siteTheme') === 'windhorse';
+  const applyTheme = (windhorse) => {
+    if (windhorse) {
+      document.body.classList.add('windhorse');
+      toggleBtn.textContent = '🌸 switch to sage';
+    } else {
+      document.body.classList.remove('windhorse');
+      toggleBtn.textContent = '🎨 switch to wind horse';
+    }
+    localStorage.setItem('siteTheme', windhorse ? 'windhorse' : 'sage');
+  };
+  if (loadTheme()) applyTheme(true);
+  toggleBtn.addEventListener('click', () => {
+    applyTheme(!document.body.classList.contains('windhorse'));
   });
 </script>
 </body>
