@@ -3,90 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>🌱 pixel garden · pomodoro</title>
-  <!-- Pixel font (optional, but strongly recommended for retro feel) -->
+  <title>🌸 animal crossing pomodoro garden</title>
+  <!-- pixel font -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      image-rendering: crisp-edges; /* pixelated scaling */
+      image-rendering: crisp-edges;
       image-rendering: pixelated;
       image-rendering: pixelated;
     }
 
     body {
-      background: #E2ECDA;  /* deeper sage */
+      background: #C8DFB0;  /* soft sage background */
       font-family: 'Press Start 2P', 'Courier New', monospace;
-      color: #3A5C34;
-      line-height: 1.5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
       padding: 1rem;
     }
 
-    /* retro container with pixel border */
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      background: #FDF8EE;  /* warm cream paper */
-      border: 4px solid #A8C99E;
+    /* retro game window */
+    .game-container {
+      max-width: 750px;
+      width: 100%;
+      background: #FEF8E7;
+      border: 5px solid #9BBC7A;
       box-shadow: 8px 8px 0 #6A8E5C;
+      border-radius: 0; /* sharp corners for pixel feel */
     }
 
     .header {
-      padding: 1.2rem;
+      background: #E2EEC9;
+      padding: 1rem;
       text-align: center;
-      background: #F4F7E6;
-      border-bottom: 3px solid #A8C99E;
+      border-bottom: 3px solid #9BBC7A;
     }
 
     .back-home {
       display: inline-block;
-      background: #E5EFDC;
-      border: 2px solid #A8C99E;
-      padding: 0.4rem 1rem;
+      background: #F4E7C3;
+      border: 2px solid #9BBC7A;
+      padding: 0.3rem 0.8rem;
       text-decoration: none;
-      font-size: 0.6rem;
-      color: #4A6B3F;
-      margin-bottom: 0.8rem;
+      font-size: 0.55rem;
+      color: #5C7A4A;
       font-family: inherit;
-      box-shadow: 2px 2px 0 #A8C99E;
+      box-shadow: 3px 3px 0 #9BBC7A;
       transition: 0.05s linear;
+      margin-bottom: 0.5rem;
     }
     .back-home:active {
       transform: translate(2px, 2px);
-      box-shadow: none;
+      box-shadow: 1px 1px 0 #9BBC7A;
     }
 
     h1 {
-      font-size: 1.2rem;
-      letter-spacing: -0.5px;
-      color: #5C824B;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
+      font-size: 0.9rem;
+      color: #6A8E5C;
+      letter-spacing: 1px;
     }
 
-    /* pixel timer panel */
-    .timer-panel {
-      background: #F4F1E3;
-      margin: 1.5rem;
+    /* canvas area (pixel garden) */
+    .garden-canvas-wrapper {
       padding: 1rem;
-      border: 3px solid #A8C99E;
-      box-shadow: inset 0 0 0 2px #FEFCF5, 0 4px 0 #6A8E5C;
+      background: #E6D5B3;
+      display: flex;
+      justify-content: center;
+    }
+    canvas {
+      display: block;
+      margin: 0 auto;
+      box-shadow: 4px 4px 0 #9BBC7A;
+      image-rendering: crisp-edges;
+      image-rendering: pixelated;
+      width: 100%;
+      height: auto;
+      background: #BCDA9A; /* grass */
+    }
+
+    /* timer panel below canvas */
+    .timer-panel {
+      background: #FEF8E7;
+      margin: 1rem;
+      padding: 1rem;
+      border: 3px solid #9BBC7A;
+      box-shadow: inset 0 0 0 2px #FFF6E0, 0 4px 0 #6A8E5C;
     }
     .timer-display {
-      font-size: 2.2rem;
+      font-size: 1.5rem;
       text-align: center;
-      font-family: 'Press Start 2P', monospace;
       background: #2C3E2B;
       color: #CBE5C1;
-      padding: 0.6rem;
-      letter-spacing: 4px;
+      padding: 0.5rem;
+      font-family: 'Press Start 2P', monospace;
+      letter-spacing: 3px;
       margin-bottom: 1rem;
-      border: 2px solid #A8C99E;
     }
     .timer-buttons {
       display: flex;
@@ -98,7 +113,7 @@
       background: #E5EFDC;
       border: none;
       font-family: 'Press Start 2P', monospace;
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       padding: 0.5rem 1rem;
       color: #3A5C34;
       cursor: pointer;
@@ -110,112 +125,60 @@
       box-shadow: 1px 1px 0 #6A8E5C;
     }
 
-    /* garden area */
-    .garden-section {
-      margin: 1.5rem;
-    }
-    .garden-header {
+    .controls {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
+      align-items: center;
+      margin: 0.5rem 1rem 1rem 1rem;
+      font-size: 0.5rem;
       flex-wrap: wrap;
-      margin-bottom: 1rem;
-      font-size: 0.7rem;
     }
     .reset-garden {
-      background: none;
-      border: 2px solid #A8C99E;
+      background: #E2C8A8;
+      border: 2px solid #9BBC7A;
       padding: 0.3rem 0.8rem;
       font-family: inherit;
-      font-size: 0.6rem;
+      font-size: 0.55rem;
       cursor: pointer;
       color: #5C7A4A;
-      box-shadow: 2px 2px 0 #A8C99E;
+      box-shadow: 2px 2px 0 #9BBC7A;
     }
-    .reset-garden:active {
-      transform: translate(1px,1px);
-      box-shadow: none;
-    }
-
-    /* 4x4 pixel grid */
-    .garden-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      background: #D9E6CF;
-      padding: 1rem;
-      border: 4px solid #A8C99E;
-      margin-bottom: 1rem;
-    }
-    .plot {
-      aspect-ratio: 1 / 1;
-      background: #BFD8B0;
-      image-rendering: pixelated;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.2rem;
-      border: 2px solid #8FAD7D;
-      box-shadow: inset 0 0 0 1px #FEFCF5, 2px 2px 0 #6A8E5C;
-      transition: 0.05s linear;
-    }
-    /* pixel plant grows */
-    .plot.has-plant {
-      background: #AAC99E;
-      border: 2px solid #6E8F60;
-    }
-
-    /* pixel character sprite (anime girl) */
-    .character {
-      text-align: center;
-      margin-top: 0.5rem;
-      margin-bottom: 1rem;
-    }
-    .pixel-sprite {
-      display: inline-block;
-      width: 64px;
-      height: 64px;
-      background: #FDF8EE;
-      image-rendering: pixelated;
-      font-size: 3rem;
-      filter: drop-shadow(2px 2px 0 #A8C99E);
-    }
-
     .info-text {
-      font-size: 0.55rem;
+      background: #F4E7C3;
+      padding: 0.4rem;
       text-align: center;
-      background: #EFEEDE;
-      padding: 0.5rem;
-      border: 1px solid #A8C99E;
-      margin-top: 0.8rem;
+      font-size: 0.45rem;
+      margin: 0 1rem 1rem 1rem;
     }
-
     .footer {
-      background: #F4F1E3;
+      background: #E2EEC9;
       text-align: center;
-      padding: 0.8rem;
-      font-size: 0.5rem;
-      border-top: 3px solid #A8C99E;
-      color: #5C7A4A;
+      padding: 0.7rem;
+      font-size: 0.45rem;
+      border-top: 3px solid #9BBC7A;
+      color: #6A8E5C;
     }
     @media (max-width: 550px) {
-      .plot { font-size: 1.5rem; }
-      .timer-display { font-size: 1.5rem; }
-      .timer-btn { font-size: 0.55rem; }
+      .timer-display { font-size: 1rem; }
+      .timer-btn { font-size: 0.5rem; }
+      h1 { font-size: 0.7rem; }
     }
   </style>
 </head>
 <body>
-<div class="container">
+<div class="game-container">
   <div class="header">
     <a href="index.html" class="back-home">← back home</a>
-    <h1>
-      <span>🌾</span> POMODORO SEEDLING GARDEN <span>🌸</span>
-    </h1>
-    <p style="font-size:0.55rem; margin-top:0.5rem;">each pomodoro = one new plant friend 🌿</p>
+    <h1>🌾 POMODORO VILLAGE GARDEN 🌸</h1>
+    <p style="font-size:0.45rem; margin-top:6px;">each focus session = water your plants → they grow!</p>
   </div>
 
-  <!-- TIMER (pixel style) -->
+  <!-- canvas draws the whole scene (background + character + plants) -->
+  <div class="garden-canvas-wrapper">
+    <canvas id="gardenCanvas" width="600" height="400" style="width:100%; height:auto; max-width:600px; aspect-ratio:600/400"></canvas>
+  </div>
+
+  <!-- timer -->
   <div class="timer-panel">
     <div class="timer-display" id="timerDisplay">25:00</div>
     <div class="timer-buttons">
@@ -225,162 +188,310 @@
     </div>
   </div>
 
-  <!-- GARDEN + PIXEL ANIME CHARACTER -->
-  <div class="garden-section">
-    <div class="garden-header">
-      <span>🌱 MY PIXEL PLOT</span>
-      <button class="reset-garden" id="resetGardenBtn">CLEAR GARDEN</button>
-    </div>
-    <div class="garden-grid" id="gardenGrid"></div>
-
-    <!-- cute pixel anime girl (emoji + pixel border) -->
-    <div class="character">
-      <div class="pixel-sprite">
-        👧🏻🌼
-      </div>
-      <div style="font-size:0.5rem; margin-top: 4px;">「 plant keeper ˗ˋˏ ♡ ˎˊ˗ 」</div>
-    </div>
-    <div class="info-text">
-      🎮 each 25min focus = 1 pixel plant grows!<br>
-      💾 garden auto-saves — keep nurturing your digital patch.
-    </div>
+  <div class="controls">
+    <span>🌱 plant growth: 0/16</span>
+    <button class="reset-garden" id="resetGardenBtn">🗑️ clear garden</button>
   </div>
-
+  <div class="info-text">
+    💾 auto-saved · each completed pomodoro waters a random unwatered plant → it grows one stage!<br>
+    🌟 stages: seed → sprout → flower → fruit (then fully grown)
+  </div>
   <div class="footer">
-    ⚡ pixel mode · sage pastel · grow with intention
+    🎮 pixel animal crossing vibe · pastel sage · be kind to your focus
   </div>
 </div>
 
 <script>
-  // ---------- TIMER ----------
-  let timeLeft = 25 * 60;
-  let timerInterval = null;
-  let isRunning = false;
-
-  const timerDisplay = document.getElementById('timerDisplay');
-  const startBtn = document.getElementById('startBtn');
-  const pauseBtn = document.getElementById('pauseBtn');
-  const resetBtn = document.getElementById('resetBtn');
-
-  function updateTimerDisplay() {
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
-    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-  }
-
-  function completePomodoro() {
-    if (timeLeft === 0) {
-      addPlantToGarden();
-      timeLeft = 25 * 60;
-      updateTimerDisplay();
+  (function() {
+    // ---------- GARDEN DATA ----------
+    // 4x4 grid = 16 plants
+    const GRID_SIZE = 4;
+    const TOTAL_PLANTS = GRID_SIZE * GRID_SIZE;
+    // growth stages: 0=seed, 1=sprout, 2=flower, 3=fruit (full)
+    let gardenStages = new Array(TOTAL_PLANTS).fill(0);
+    // track which plants have been watered this session? Actually each pomodoro = +1 stage to a random uncompleted plant
+    // but we need to avoid over-watering the same plant? better: pick a random plant that is not yet at max stage
+    
+    const GARDEN_KEY = 'ac_pomodoro_garden';
+    
+    // load from localStorage
+    function loadGarden() {
+      const saved = localStorage.getItem(GARDEN_KEY);
+      if (saved) {
+        gardenStages = JSON.parse(saved);
+      } else {
+        gardenStages = new Array(TOTAL_PLANTS).fill(0);
+      }
+      drawCanvas();
+    }
+    
+    function saveGarden() {
+      localStorage.setItem(GARDEN_KEY, JSON.stringify(gardenStages));
+    }
+    
+    // add growth to a random plant that is not yet fruit (stage < 3)
+    function waterRandomPlant() {
+      const incompleteIndices = [];
+      for (let i = 0; i < TOTAL_PLANTS; i++) {
+        if (gardenStages[i] < 3) incompleteIndices.push(i);
+      }
+      if (incompleteIndices.length === 0) {
+        // all plants fully grown: show message
+        const info = document.querySelector('.info-text');
+        const original = info.innerHTML;
+        info.innerHTML = '🎉 your garden is fully grown! clear it to start again 🎉';
+        setTimeout(() => { info.innerHTML = original; }, 3000);
+        return false;
+      }
+      const randomIndex = incompleteIndices[Math.floor(Math.random() * incompleteIndices.length)];
+      gardenStages[randomIndex] = Math.min(gardenStages[randomIndex] + 1, 3);
+      saveGarden();
+      drawCanvas();
+      return true;
+    }
+    
+    function resetGarden() {
+      gardenStages.fill(0);
+      saveGarden();
+      drawCanvas();
+    }
+    
+    // ---------- CANVAS DRAWING (pixel art) ----------
+    const canvas = document.getElementById('gardenCanvas');
+    const ctx = canvas.getContext('2d');
+    // pixel scaling – disable smoothing
+    ctx.imageSmoothingEnabled = false;
+    
+    // dimensions: 600x400
+    const W = 600, H = 400;
+    canvas.width = W;
+    canvas.height = H;
+    
+    // Helper: draw pixelated rectangle (no anti-aliasing)
+    function drawPixelRect(x, y, w, h, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x, y, w, h);
+    }
+    
+    // draw background (sky, grass, fence)
+    function drawBackground() {
+      // sky
+      drawPixelRect(0, 0, W, 150, '#D9F0E6'); // pastel sky
+      // grass
+      drawPixelRect(0, 150, W, 250, '#BCDA9A');
+      // clouds (pixel style)
+      ctx.fillStyle = '#FFF9E8';
+      ctx.fillRect(80, 40, 50, 20);
+      ctx.fillRect(100, 20, 40, 20);
+      ctx.fillRect(420, 60, 60, 20);
+      ctx.fillRect(440, 40, 40, 20);
+      
+      // fence posts (simple)
+      ctx.fillStyle = '#D4B88C';
+      for (let x = 20; x < W; x += 50) {
+        ctx.fillRect(x, 140, 6, 25);
+        ctx.fillRect(x+2, 148, 2, 15);
+      }
+    }
+    
+    // draw soil plots (4x4 grid)
+    const plotW = 70, plotH = 50;
+    const startX = 40, startY = 200;
+    const spacingX = 15, spacingY = 15;
+    
+    function drawPlots() {
+      for (let row = 0; row < GRID_SIZE; row++) {
+        for (let col = 0; col < GRID_SIZE; col++) {
+          const x = startX + col * (plotW + spacingX);
+          const y = startY + row * (plotH + spacingY);
+          // soil color
+          ctx.fillStyle = '#8B5E3C';
+          ctx.fillRect(x, y, plotW, plotH);
+          // dark border
+          ctx.strokeStyle = '#5C3A1E';
+          ctx.lineWidth = 2;
+          ctx.strokeRect(x+1, y+1, plotW-2, plotH-2);
+          
+          // draw plant based on stage
+          const idx = row * GRID_SIZE + col;
+          const stage = gardenStages[idx];
+          const centerX = x + plotW/2;
+          const bottomY = y + plotH - 8;
+          
+          if (stage > 0) {
+            // draw pixel plant at position
+            drawPlant(centerX, bottomY, stage);
+          } else {
+            // seed (tiny brown dot)
+            ctx.fillStyle = '#5C3A1E';
+            ctx.fillRect(centerX-3, bottomY-2, 6, 4);
+          }
+        }
+      }
+    }
+    
+    function drawPlant(cx, cy, stage) {
+      // pixel art plant based on stage
+      // stage 1: sprout (two green pixels)
+      // stage 2: flower (pink/magenta)
+      // stage 3: fruit (red/orange berry)
+      ctx.fillStyle = '#6B8C5C';
+      if (stage === 1) {
+        ctx.fillRect(cx-3, cy-10, 3, 12);
+        ctx.fillRect(cx+1, cy-8, 3, 10);
+        ctx.fillStyle = '#A8D48A';
+        ctx.fillRect(cx-3, cy-12, 3, 3);
+        ctx.fillRect(cx+1, cy-10, 3, 3);
+      } 
+      else if (stage === 2) {
+        // stem
+        ctx.fillStyle = '#6B8C5C';
+        ctx.fillRect(cx-2, cy-12, 4, 14);
+        // flower petals
+        ctx.fillStyle = '#F4B3C2'; // pastel pink
+        ctx.fillRect(cx-5, cy-16, 3, 5);
+        ctx.fillRect(cx+2, cy-16, 3, 5);
+        ctx.fillRect(cx-1, cy-18, 3, 5);
+        ctx.fillStyle = '#F7D695'; // center
+        ctx.fillRect(cx-1, cy-14, 3, 3);
+      } 
+      else if (stage === 3) {
+        // fruit (little strawberry or peach)
+        ctx.fillStyle = '#6B8C5C';
+        ctx.fillRect(cx-2, cy-10, 4, 12);
+        ctx.fillStyle = '#E67E5E'; // peach
+        ctx.fillRect(cx-4, cy-16, 8, 8);
+        ctx.fillStyle = '#8BBC5A';
+        ctx.fillRect(cx-1, cy-17, 3, 3);
+      }
+    }
+    
+    // draw chibi animal crossing character (cat-like)
+    function drawCharacter() {
+      // position: near the right side, below fence
+      const charX = 480, charY = 160;
+      // body
+      ctx.fillStyle = '#F7E2B0'; // cream fur
+      ctx.fillRect(charX-12, charY-5, 24, 28);
+      // head
+      ctx.fillStyle = '#F7E2B0';
+      ctx.fillRect(charX-14, charY-20, 28, 24);
+      // ears
+      ctx.fillStyle = '#E2BC7C';
+      ctx.fillRect(charX-16, charY-28, 8, 12);
+      ctx.fillRect(charX+8, charY-28, 8, 12);
+      // eyes
+      ctx.fillStyle = '#3A2A1A';
+      ctx.fillRect(charX-6, charY-12, 4, 4);
+      ctx.fillRect(charX+2, charY-12, 4, 4);
+      // blush
+      ctx.fillStyle = '#F2A2B3';
+      ctx.fillRect(charX-10, charY-8, 4, 2);
+      ctx.fillRect(charX+6, charY-8, 4, 2);
+      // mouth
+      ctx.fillStyle = '#5C3A1E';
+      ctx.fillRect(charX-2, charY-6, 4, 2);
+      // little watering can (pixel)
+      ctx.fillStyle = '#7F9F7A';
+      ctx.fillRect(charX+12, charY-10, 10, 6);
+      ctx.fillStyle = '#A8C99E';
+      ctx.fillRect(charX+18, charY-14, 4, 5);
+      
+      // speech bubble
+      ctx.fillStyle = '#FFFDE7';
+      ctx.fillRect(charX+25, charY-28, 45, 20);
+      ctx.fillStyle = '#3A5C34';
+      ctx.font = '7px "Press Start 2P"';
+      ctx.fillText("focus!", charX+30, charY-16);
+    }
+    
+    function drawCanvas() {
+      drawBackground();
+      drawPlots();
+      drawCharacter();
+      // update plant count display
+      const grownCount = gardenStages.filter(s => s === 3).length;
+      const total = TOTAL_PLANTS;
+      const counterSpan = document.querySelector('.controls span');
+      if (counterSpan) counterSpan.innerHTML = `🌿 grown fruit: ${grownCount}/${total}`;
+    }
+    
+    // ---------- TIMER LOGIC ----------
+    let timeLeft = 25 * 60;
+    let timerInterval = null;
+    let isRunning = false;
+    const timerDisplay = document.getElementById('timerDisplay');
+    const startBtn = document.getElementById('startBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    
+    function updateTimerDisplay() {
+      const mins = Math.floor(timeLeft / 60);
+      const secs = timeLeft % 60;
+      timerDisplay.textContent = `${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+    }
+    
+    function completePomodoro() {
+      if (timeLeft === 0) {
+        const success = waterRandomPlant();
+        // reset timer to 25:00 but not auto-start
+        timeLeft = 25 * 60;
+        updateTimerDisplay();
+        if (timerInterval) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          isRunning = false;
+        }
+        // visual feedback: flash canvas
+        canvas.style.filter = 'brightness(1.2)';
+        setTimeout(() => canvas.style.filter = '', 200);
+      }
+    }
+    
+    function startTimer() {
+      if (timerInterval) return;
+      isRunning = true;
+      timerInterval = setInterval(() => {
+        if (timeLeft > 0) {
+          timeLeft--;
+          updateTimerDisplay();
+          if (timeLeft === 0) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            isRunning = false;
+            completePomodoro();
+          }
+        }
+      }, 1000);
+    }
+    
+    function pauseTimer() {
       if (timerInterval) {
         clearInterval(timerInterval);
         timerInterval = null;
         isRunning = false;
       }
     }
-  }
-
-  function startTimer() {
-    if (timerInterval) return;
-    isRunning = true;
-    timerInterval = setInterval(() => {
-      if (timeLeft > 0) {
-        timeLeft--;
-        updateTimerDisplay();
-        if (timeLeft === 0) {
-          clearInterval(timerInterval);
-          timerInterval = null;
-          isRunning = false;
-          completePomodoro();
-        }
-      }
-    }, 1000);
-  }
-
-  function pauseTimer() {
-    if (timerInterval) {
-      clearInterval(timerInterval);
-      timerInterval = null;
-      isRunning = false;
+    
+    function resetTimer() {
+      pauseTimer();
+      timeLeft = 25 * 60;
+      updateTimerDisplay();
     }
-  }
-
-  function resetTimer() {
-    pauseTimer();
-    timeLeft = 25 * 60;
+    
+    startBtn.addEventListener('click', startTimer);
+    pauseBtn.addEventListener('click', pauseTimer);
+    resetBtn.addEventListener('click', resetTimer);
+    
+    const resetGardenBtn = document.getElementById('resetGardenBtn');
+    resetGardenBtn.addEventListener('click', () => {
+      resetGarden();
+    });
+    
+    // initial load
+    loadGarden();
     updateTimerDisplay();
-  }
-
-  startBtn.addEventListener('click', startTimer);
-  pauseBtn.addEventListener('click', pauseTimer);
-  resetBtn.addEventListener('click', resetTimer);
-
-  // ---------- GARDEN WITH LOCALSTORAGE ----------
-  const GARDEN_KEY = 'pixel_pomodoro_garden';
-  let gardenPlants = []; // boolean array
-  const MAX_PLANTS = 16;
-  const gardenGrid = document.getElementById('gardenGrid');
-
-  // cute pixel plant sprites (different per index)
-  const plantSprites = [
-    '🌱','🌿','🍃','🌸','🌻','🍓','🍄','🌼',
-    '🌺','🍀','🌵','🎋','🍂','✨','💚','🍎'
-  ];
-
-  function saveGarden() {
-    localStorage.setItem(GARDEN_KEY, JSON.stringify(gardenPlants));
-  }
-
-  function loadGarden() {
-    const saved = localStorage.getItem(GARDEN_KEY);
-    if (saved) {
-      gardenPlants = JSON.parse(saved);
-    } else {
-      gardenPlants = new Array(MAX_PLANTS).fill(false);
-    }
-    renderGarden();
-  }
-
-  function renderGarden() {
-    gardenGrid.innerHTML = '';
-    for (let i = 0; i < MAX_PLANTS; i++) {
-      const plot = document.createElement('div');
-      plot.classList.add('plot');
-      if (gardenPlants[i]) {
-        plot.classList.add('has-plant');
-        plot.textContent = plantSprites[i % plantSprites.length];
-      } else {
-        plot.textContent = '🟫'; // pixel dirt
-        plot.style.opacity = '0.7';
-      }
-      gardenGrid.appendChild(plot);
-    }
-  }
-
-  function addPlantToGarden() {
-    const emptyIndex = gardenPlants.findIndex(has => has === false);
-    if (emptyIndex !== -1) {
-      gardenPlants[emptyIndex] = true;
-      saveGarden();
-      renderGarden();
-    } else {
-      const infoDiv = document.querySelector('.info-text');
-      const original = infoDiv.innerHTML;
-      infoDiv.innerHTML = '🎉 GARDEN FULL! Clear it to grow more 🎉';
-      setTimeout(() => { infoDiv.innerHTML = original; }, 3000);
-    }
-  }
-
-  function resetGarden() {
-    gardenPlants = new Array(MAX_PLANTS).fill(false);
-    saveGarden();
-    renderGarden();
-  }
-
-  document.getElementById('resetGardenBtn').addEventListener('click', resetGarden);
-  loadGarden();
-  updateTimerDisplay();
+  })();
 </script>
 </body>
 </html>
