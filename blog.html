@@ -41,11 +41,10 @@
       border-radius: 60px;
       padding: 0.4rem 1.2rem;
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #5F7C53;
       margin-bottom: 1rem;
       transition: 0.2s;
-      font-weight: 500;
     }
     .back-home:hover {
       background: #E2EFD8;
@@ -62,11 +61,40 @@
     .blog-sub {
       color: #7B9A6B;
       font-size: 1rem;
-      margin-bottom: 0.5rem;
+    }
+
+    /* filter bar */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      margin: 1.5rem 0 2rem 0;
+    }
+    .filter-btn {
+      background: #F9FCF7;
+      border: 1px solid #CDE0C1;
+      padding: 0.4rem 1.2rem;
+      border-radius: 60px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #6D8F5E;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .filter-btn:hover {
+      background: #E2EFD8;
+      transform: translateY(-2px);
+    }
+    .filter-btn.active {
+      background: #C9DFBC;
+      color: #3C5A2F;
+      border-color: #B2CA9F;
     }
 
     .content {
-      padding: 2rem;
+      padding: 0 2rem 2rem 2rem;
     }
 
     .blog-posts {
@@ -88,12 +116,25 @@
       box-shadow: 0 12px 22px #BED1AE70;
     }
 
+    .post-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
+    }
     .post-date {
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 1px;
       color: #8DAF7A;
-      margin-bottom: 0.5rem;
+    }
+    .post-category {
+      font-size: 0.7rem;
+      background: #EFF6EB;
+      padding: 0.2rem 0.7rem;
+      border-radius: 30px;
+      color: #6D8F5E;
     }
 
     .post-title {
@@ -145,7 +186,7 @@
     @media (max-width: 600px) {
       body { padding: 0.8rem; }
       .post-title { font-size: 1.3rem; }
-      .content { padding: 1.2rem; }
+      .content { padding: 0 1.2rem 1.5rem 1.2rem; }
     }
   </style>
 </head>
@@ -157,45 +198,90 @@
     <div class="blog-sub">soft thoughts · cozy code · daily moments</div>
   </div>
 
+  <!-- FILTER BAR -->
+  <div class="filter-bar" id="filterBar">
+    <button class="filter-btn active" data-filter="all">✨ all</button>
+    <button class="filter-btn" data-filter="philosophy">🧠 philosophy</button>
+    <button class="filter-btn" data-filter="review">📖 review</button>
+    <button class="filter-btn" data-filter="travel">✈️ travel</button>
+    <button class="filter-btn" data-filter="code">💻 code / tech</button>
+    <button class="filter-btn" data-filter="personal">🌱 personal</button>
+  </div>
+
   <div class="content">
-    <div class="blog-posts">
+    <div class="blog-posts" id="blogPostsContainer">
       
-      <!-- sample post 1 -->
-      <div class="post-card">
-        <div class="post-date">june 5, 2026</div>
-        <div class="post-title">matcha & morning light</div>
-        <div class="post-summary">there’s something special about the first sip of matcha when the sun hits the window just right. today i'm sharing my tiny morning ritual and a new playlist i made for slow starts 🍵✨</div>
+      <!-- POST 1 - philosophy -->
+      <div class="post-card" data-category="philosophy">
+        <div class="post-meta">
+          <span class="post-date">june 5, 2026</span>
+          <span class="post-category">🧠 philosophy</span>
+        </div>
+        <div class="post-title">slow interfaces: designing for digital calm</div>
+        <div class="post-summary">a reflection on how loading spinners, haptic feedback, and even font choices shape our emotional state. can we build websites that feel like a deep breath?</div>
         <a href="#" class="read-more">continue reading →</a>
       </div>
 
-      <!-- sample post 2 -->
-      <div class="post-card">
-        <div class="post-date">may 28, 2026</div>
-        <div class="post-title">how i built this website</div>
-        <div class="post-summary">a behind-the-scenes look at creating my little corner of the internet – choosing sage green, helvetica neue, and adding cute interactions like the mood button 🌸</div>
+      <!-- POST 2 - travel -->
+      <div class="post-card" data-category="travel">
+        <div class="post-meta">
+          <span class="post-date">may 28, 2026</span>
+          <span class="post-category">✈️ travel</span>
+        </div>
+        <div class="post-title">finding quiet cafés in tokyo</div>
+        <div class="post-summary">a travel diary of tiny coffee shops, analog notebooks, and the beauty of slow tourism. plus my favourite matcha spot in shimokitazawa.</div>
         <a href="#" class="read-more">continue reading →</a>
       </div>
 
-      <!-- sample post 3 -->
-      <div class="post-card">
-        <div class="post-date">may 20, 2026</div>
-        <div class="post-title">my favorite ghibli soundtracks for coding</div>
-        <div class="post-summary">from howl's moving castle to kiki's delivery service – these piano pieces make any bug-fixing session feel magical. 🎹🐞</div>
+      <!-- POST 3 - review -->
+      <div class="post-card" data-category="review">
+        <div class="post-meta">
+          <span class="post-date">may 20, 2026</span>
+          <span class="post-category">📖 review</span>
+        </div>
+        <div class="post-title">book review: “braiding sweetgrass” by robin wall kimmerer</div>
+        <div class="post-summary">how this book changed the way i think about reciprocity, design ethics, and caring for digital spaces. a must-read for anyone in HCI or creative tech.</div>
         <a href="#" class="read-more">continue reading →</a>
       </div>
 
-      <!-- sample post 4 – you can add more -->
-      <div class="post-card">
-        <div class="post-date">may 12, 2026</div>
-        <div class="post-title">plant update: my little sage garden</div>
-        <div class="post-summary">my windowsill herb garden is thriving! turns out talking to your plants actually works. plus: my new favorite soil mix 🌿</div>
+      <!-- POST 4 - code / tech -->
+      <div class="post-card" data-category="code">
+        <div class="post-meta">
+          <span class="post-date">may 12, 2026</span>
+          <span class="post-category">💻 code / tech</span>
+        </div>
+        <div class="post-title">how i built this site: vanilla html/css with a mood button</div>
+        <div class="post-summary">a step‑by‑step tutorial on creating a personal website with zero frameworks. includes flexbox, CSS transitions, and a tiny js interactive feature.</div>
         <a href="#" class="read-more">continue reading →</a>
       </div>
+
+      <!-- POST 5 - personal -->
+      <div class="post-card" data-category="personal">
+        <div class="post-meta">
+          <span class="post-date">may 5, 2026</span>
+          <span class="post-category">🌱 personal</span>
+        </div>
+        <div class="post-title">a letter to my 20‑year‑old self</div>
+        <div class="post-summary">on imposter syndrome, choosing softness over hustle, and why i’m glad i built a tiny corner of the internet just for me.</div>
+        <a href="#" class="read-more">continue reading →</a>
+      </div>
+
+      <!-- POST 6 - philosophy (example of another) -->
+      <div class="post-card" data-category="philosophy">
+        <div class="post-meta">
+          <span class="post-date">april 22, 2026</span>
+          <span class="post-category">🧠 philosophy</span>
+        </div>
+        <div class="post-title">why i don’t use analytics on my personal site</div>
+        <div class="post-summary">privacy, digital footprints, and the choice to opt out of surveillance. a short essay on owning your stats (or not).</div>
+        <a href="#" class="read-more">continue reading →</a>
+      </div>
+
     </div>
 
     <hr>
     <div style="text-align: center; font-size: 0.8rem; margin-top: 1rem;">
-      ✨ more posts coming soon — thanks for reading ✨
+      ✨ filter by topic — more posts coming soon ✨
     </div>
   </div>
 
@@ -203,5 +289,33 @@
     🌸 from sarah with a cup of tea · <a href="index.html" style="color:#7F9C6E;">back home</a>
   </div>
 </div>
+
+<script>
+  // filter functionality
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const posts = document.querySelectorAll('.post-card');
+
+  function filterPosts(category) {
+    posts.forEach(post => {
+      const postCategory = post.getAttribute('data-category');
+      if (category === 'all' || postCategory === category) {
+        post.style.display = '';
+      } else {
+        post.style.display = 'none';
+      }
+    });
+  }
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // update active class
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      const filterValue = btn.getAttribute('data-filter');
+      filterPosts(filterValue);
+    });
+  });
+</script>
 </body>
 </html>
