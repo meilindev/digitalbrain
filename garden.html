@@ -14,25 +14,29 @@
 
     body {
       min-height: 100vh;
-      background: linear-gradient(145deg, #DDEAD4 0%, #C2D5B3 100%);
       font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 1.5rem;
       position: relative;
+      transition: background 0.3s ease;
     }
 
-    /* floating animal crossing characters (simple & cute) */
+    /* default gradient (sage) */
+    body {
+      background: linear-gradient(145deg, #DDEAD4 0%, #C2D5B3 100%);
+    }
+
+    /* floating animal crossing characters */
     .ac-character {
       position: fixed;
       font-size: 3rem;
       filter: drop-shadow(0 4px 6px rgba(60, 50, 30, 0.15));
       pointer-events: none;
       z-index: 1;
+      transition: transform 0.2s;
     }
-
-    /* different positions */
     .char1 { bottom: 8%; left: 5%; }
     .char2 { top: 12%; right: 6%; }
     .char3 { bottom: 20%; right: 8%; }
@@ -43,8 +47,8 @@
       background: rgba(254, 252, 245, 0.92);
       backdrop-filter: blur(2px);
       border-radius: 56px;
-      padding: 2.5rem 2rem;
-      max-width: 500px;
+      padding: 2rem 2rem 1.8rem;
+      max-width: 520px;
       width: 100%;
       text-align: center;
       box-shadow: 0 25px 40px -12px rgba(50, 40, 20, 0.25);
@@ -135,10 +139,46 @@
     }
 
     .footer-note {
-      margin-top: 1.2rem;
+      margin-top: 1rem;
       font-size: 0.7rem;
       color: #8DAF7A;
     }
+
+    /* THEME SELECTOR */
+    .theme-section {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #DDEAD4;
+    }
+    .theme-title {
+      font-size: 0.7rem;
+      color: #8DAF7A;
+      margin-bottom: 0.8rem;
+      letter-spacing: 1px;
+    }
+    .theme-palette {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+    .theme-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #FEFCF5;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: 0.1s linear;
+    }
+    .theme-btn:hover {
+      transform: scale(1.1);
+      border-color: white;
+    }
+    /* gradient swatches */
+    .gradient1 { background: radial-gradient(circle at 30% 20%, #FAD0C4, #FFD1FF); }
+    .gradient2 { background: radial-gradient(circle at 70% 30%, #C9E4DE, #C2E0F0); }
+    .gradient3 { background: radial-gradient(circle at 40% 60%, #FDE2C4, #FCE4B8); }
 
     @media (max-width: 550px) {
       .timer-display {
@@ -149,14 +189,18 @@
         font-size: 2rem;
       }
       .timer-card {
-        padding: 1.8rem 1.2rem;
+        padding: 1.5rem 1.2rem;
+      }
+      .theme-btn {
+        width: 32px;
+        height: 32px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Animal Crossing characters as emoji + text (cute, simple, recognizable) -->
+  <!-- Animal Crossing characters -->
   <div class="ac-character char1" title="Isabelle">🐶📋✨</div>
   <div class="ac-character char2" title="Tom Nook">🦝🪙🍃</div>
   <div class="ac-character char3" title="K.K. Slider">🐕🎸🎵</div>
@@ -173,19 +217,33 @@
     <div class="session-counter">
       🍅 pomodoros completed today · <span class="counter-number" id="sessionCount">0</span>
     </div>
+
+    <!-- THEME SELECTOR -->
+    <div class="theme-section">
+      <div class="theme-title">🎨 change mood · pastel themes</div>
+      <div class="theme-palette">
+        <div class="theme-btn" data-theme="sage" style="background: #DDEAD4;"></div>
+        <div class="theme-btn" data-theme="lavender" style="background: #E2D9F0;"></div>
+        <div class="theme-btn" data-theme="peach" style="background: #FCE4D6;"></div>
+        <div class="theme-btn" data-theme="mint" style="background: #C8E6D9;"></div>
+        <div class="theme-btn" data-theme="cottoncandy" style="background: #F8E0F0;"></div>
+        <div class="theme-btn gradient1" data-theme="gradientSunset"></div>
+        <div class="theme-btn gradient2" data-theme="gradientOcean"></div>
+        <div class="theme-btn gradient3" data-theme="gradientHoney"></div>
+      </div>
+    </div>
     <div class="footer-note">
       🍃 focus with friends — each completed session grows your island spirit
     </div>
   </div>
 
   <script>
-    // Timer state
-    let timeLeft = 25 * 60;  // 25 minutes in seconds
+    // Timer logic (same as before)
+    let timeLeft = 25 * 60;
     let timerId = null;
     let isRunning = false;
     let sessionsCompleted = 0;
 
-    // Load session count from localStorage
     if (localStorage.getItem('pomodoroSessions')) {
       sessionsCompleted = parseInt(localStorage.getItem('pomodoroSessions')) || 0;
       document.getElementById('sessionCount').innerText = sessionsCompleted;
@@ -212,8 +270,6 @@
       if (timeLeft === 0) {
         sessionsCompleted++;
         saveSessionCount();
-        // little alert? no, just update UI
-        // optional: flash the card or play a tiny sound (we skip sound for simplicity)
         const card = document.querySelector('.timer-card');
         card.style.transform = 'scale(0.98)';
         setTimeout(() => card.style.transform = '', 200);
@@ -236,7 +292,6 @@
     function startTimer() {
       if (isRunning) return;
       if (timeLeft === 0) {
-        // if timer already at zero, reset to 25:00 before starting
         timeLeft = 25 * 60;
         updateDisplay();
       }
@@ -261,9 +316,42 @@
     startBtn.addEventListener('click', startTimer);
     pauseBtn.addEventListener('click', pauseTimer);
     resetBtn.addEventListener('click', resetTimer);
-
-    // initial display
     updateDisplay();
+
+    // ---------- THEME SWITCHER ----------
+    const themeButtons = document.querySelectorAll('.theme-btn');
+    
+    const themes = {
+      sage: 'linear-gradient(145deg, #DDEAD4 0%, #C2D5B3 100%)',
+      lavender: 'linear-gradient(145deg, #E2D9F0 0%, #CDBFE3 100%)',
+      peach: 'linear-gradient(145deg, #FCE4D6 0%, #F5CEB8 100%)',
+      mint: 'linear-gradient(145deg, #C8E6D9 0%, #A9D4C1 100%)',
+      cottoncandy: 'linear-gradient(145deg, #F8E0F0 0%, #EBC4DF 100%)',
+      gradientSunset: 'radial-gradient(circle at 30% 20%, #FAD0C4, #FFD1FF)',
+      gradientOcean: 'radial-gradient(circle at 70% 30%, #C9E4DE, #C2E0F0)',
+      gradientHoney: 'radial-gradient(circle at 40% 60%, #FDE2C4, #FCE4B8)'
+    };
+
+    function setTheme(themeName) {
+      if (themes[themeName]) {
+        document.body.style.background = themes[themeName];
+        // optional: save preference
+        localStorage.setItem('pomodoroTheme', themeName);
+      }
+    }
+
+    themeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const theme = btn.getAttribute('data-theme');
+        if (theme) setTheme(theme);
+      });
+    });
+
+    // load saved theme if any
+    const savedTheme = localStorage.getItem('pomodoroTheme');
+    if (savedTheme && themes[savedTheme]) {
+      document.body.style.background = themes[savedTheme];
+    }
   </script>
 </body>
 </html>
