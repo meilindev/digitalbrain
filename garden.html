@@ -2,188 +2,206 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🌱 pomodoro seedling garden · sarah</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>🌱 pixel garden · pomodoro</title>
+  <!-- Pixel font (optional, but strongly recommended for retro feel) -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      image-rendering: crisp-edges; /* pixelated scaling */
+      image-rendering: pixelated;
+      image-rendering: pixelated;
     }
 
     body {
-      background: #EFF6EB;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      color: #2C3E2B;
+      background: #E2ECDA;  /* deeper sage */
+      font-family: 'Press Start 2P', 'Courier New', monospace;
+      color: #3A5C34;
       line-height: 1.5;
-      padding: 1.5rem;
+      padding: 1rem;
     }
 
+    /* retro container with pixel border */
     .container {
-      max-width: 700px;
+      max-width: 800px;
       margin: 0 auto;
-      background: #FEFCF5;
-      border-radius: 48px 48px 48px 32px;
-      box-shadow: 0 20px 35px -12px rgba(70, 60, 40, 0.12);
-      overflow: hidden;
+      background: #FDF8EE;  /* warm cream paper */
+      border: 4px solid #A8C99E;
+      box-shadow: 8px 8px 0 #6A8E5C;
     }
 
     .header {
-      padding: 1.5rem;
+      padding: 1.2rem;
       text-align: center;
-      background: #FFFFFFD9;
-      border-bottom: 2px solid #DDEAD4;
+      background: #F4F7E6;
+      border-bottom: 3px solid #A8C99E;
     }
 
     .back-home {
       display: inline-block;
-      background: #EFF6EB;
-      border-radius: 60px;
-      padding: 0.4rem 1.2rem;
+      background: #E5EFDC;
+      border: 2px solid #A8C99E;
+      padding: 0.4rem 1rem;
       text-decoration: none;
-      font-size: 0.85rem;
-      color: #5F7C53;
-      margin-bottom: 1rem;
+      font-size: 0.6rem;
+      color: #4A6B3F;
+      margin-bottom: 0.8rem;
+      font-family: inherit;
+      box-shadow: 2px 2px 0 #A8C99E;
+      transition: 0.05s linear;
+    }
+    .back-home:active {
+      transform: translate(2px, 2px);
+      box-shadow: none;
     }
 
     h1 {
-      font-size: 2rem;
-      font-weight: 600;
-      color: #5F7C53;
+      font-size: 1.2rem;
+      letter-spacing: -0.5px;
+      color: #5C824B;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .content {
-      padding: 2rem;
-    }
-
-    /* timer panel */
+    /* pixel timer panel */
     .timer-panel {
-      background: #F9FCF7;
-      border-radius: 32px;
-      padding: 1.5rem;
-      text-align: center;
-      margin-bottom: 2rem;
-      border: 1px solid #E3EFDA;
+      background: #F4F1E3;
+      margin: 1.5rem;
+      padding: 1rem;
+      border: 3px solid #A8C99E;
+      box-shadow: inset 0 0 0 2px #FEFCF5, 0 4px 0 #6A8E5C;
     }
-
     .timer-display {
-      font-size: 3.5rem;
-      font-weight: 600;
-      font-family: monospace;
-      background: #EFF6EB;
-      display: inline-block;
-      padding: 0.5rem 1.5rem;
-      border-radius: 60px;
+      font-size: 2.2rem;
+      text-align: center;
+      font-family: 'Press Start 2P', monospace;
+      background: #2C3E2B;
+      color: #CBE5C1;
+      padding: 0.6rem;
       letter-spacing: 4px;
-      color: #4F6943;
       margin-bottom: 1rem;
+      border: 2px solid #A8C99E;
     }
-
     .timer-buttons {
       display: flex;
-      gap: 1rem;
+      gap: 0.8rem;
       justify-content: center;
       flex-wrap: wrap;
     }
-
     .timer-btn {
-      background: #EFF6EB;
-      border: 1px solid #CDE0C1;
-      padding: 0.5rem 1.2rem;
-      border-radius: 60px;
-      font-family: inherit;
-      font-weight: 500;
-      color: #5F7C53;
+      background: #E5EFDC;
+      border: none;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.7rem;
+      padding: 0.5rem 1rem;
+      color: #3A5C34;
       cursor: pointer;
-      transition: 0.2s;
+      box-shadow: 3px 3px 0 #6A8E5C;
+      transition: 0.05s linear;
+    }
+    .timer-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 #6A8E5C;
     }
 
-    .timer-btn:hover {
-      background: #E2EFD8;
-      transform: translateY(-2px);
+    /* garden area */
+    .garden-section {
+      margin: 1.5rem;
     }
-
-    /* pixel garden */
-    .garden-title {
+    .garden-header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: baseline;
       flex-wrap: wrap;
       margin-bottom: 1rem;
-    }
-    .garden-title h2 {
-      font-size: 1.5rem;
-      color: #5F7C53;
+      font-size: 0.7rem;
     }
     .reset-garden {
       background: none;
-      border: 1px solid #CDE0C1;
-      padding: 0.2rem 0.8rem;
-      border-radius: 30px;
-      font-size: 0.75rem;
+      border: 2px solid #A8C99E;
+      padding: 0.3rem 0.8rem;
+      font-family: inherit;
+      font-size: 0.6rem;
       cursor: pointer;
-      color: #7B9A6B;
+      color: #5C7A4A;
+      box-shadow: 2px 2px 0 #A8C99E;
+    }
+    .reset-garden:active {
+      transform: translate(1px,1px);
+      box-shadow: none;
     }
 
+    /* 4x4 pixel grid */
     .garden-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 12px;
-      background: #EFF6EB;
-      padding: 1.5rem;
-      border-radius: 32px;
-      border: 2px solid #DDEAD4;
+      background: #D9E6CF;
+      padding: 1rem;
+      border: 4px solid #A8C99E;
       margin-bottom: 1rem;
     }
-
     .plot {
       aspect-ratio: 1 / 1;
-      background: #E2ECDA;
-      border-radius: 20px;
+      background: #BFD8B0;
+      image-rendering: pixelated;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 2.2rem;
-      box-shadow: inset 0 0 0 2px #FEFCF5, 0 4px 8px rgba(0,0,0,0.02);
-      transition: 0.1s linear;
+      border: 2px solid #8FAD7D;
+      box-shadow: inset 0 0 0 1px #FEFCF5, 2px 2px 0 #6A8E5C;
+      transition: 0.05s linear;
+    }
+    /* pixel plant grows */
+    .plot.has-plant {
+      background: #AAC99E;
+      border: 2px solid #6E8F60;
     }
 
-    /* pixelated vibe */
-    .plot.pixel-plant {
-      background: #DDEAD4;
-      box-shadow: 0 0 0 2px #B2CA9F;
+    /* pixel character sprite (anime girl) */
+    .character {
+      text-align: center;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .pixel-sprite {
+      display: inline-block;
+      width: 64px;
+      height: 64px;
+      background: #FDF8EE;
+      image-rendering: pixelated;
+      font-size: 3rem;
+      filter: drop-shadow(2px 2px 0 #A8C99E);
     }
 
     .info-text {
-      font-size: 0.8rem;
+      font-size: 0.55rem;
       text-align: center;
-      color: #7B9A6B;
-      margin-top: 0.5rem;
-    }
-
-    hr {
-      border: none;
-      height: 1px;
-      background: #E3EFDA;
-      margin: 1rem 0;
+      background: #EFEEDE;
+      padding: 0.5rem;
+      border: 1px solid #A8C99E;
+      margin-top: 0.8rem;
     }
 
     .footer {
-      background: #F6FBF2;
-      padding: 1rem;
+      background: #F4F1E3;
       text-align: center;
-      font-size: 0.75rem;
-      color: #7B9A6B;
+      padding: 0.8rem;
+      font-size: 0.5rem;
+      border-top: 3px solid #A8C99E;
+      color: #5C7A4A;
     }
-
-    @media (max-width: 500px) {
-      .timer-display { font-size: 2.5rem; }
-      .plot { font-size: 1.6rem; }
-      .garden-grid { gap: 8px; padding: 1rem; }
+    @media (max-width: 550px) {
+      .plot { font-size: 1.5rem; }
+      .timer-display { font-size: 1.5rem; }
+      .timer-btn { font-size: 0.55rem; }
     }
   </style>
 </head>
@@ -191,40 +209,51 @@
 <div class="container">
   <div class="header">
     <a href="index.html" class="back-home">← back home</a>
-    <h1>🌱 pomodoro seedling garden 🌱</h1>
-    <p style="margin-top: 0.5rem;">each completed pomodoro grows a new plant ✨</p>
+    <h1>
+      <span>🌾</span> POMODORO SEEDLING GARDEN <span>🌸</span>
+    </h1>
+    <p style="font-size:0.55rem; margin-top:0.5rem;">each pomodoro = one new plant friend 🌿</p>
   </div>
 
-  <div class="content">
-    <!-- TIMER -->
-    <div class="timer-panel">
-      <div class="timer-display" id="timerDisplay">25:00</div>
-      <div class="timer-buttons">
-        <button class="timer-btn" id="startBtn">▶ start</button>
-        <button class="timer-btn" id="pauseBtn">⏸ pause</button>
-        <button class="timer-btn" id="resetBtn">🔄 reset</button>
-      </div>
+  <!-- TIMER (pixel style) -->
+  <div class="timer-panel">
+    <div class="timer-display" id="timerDisplay">25:00</div>
+    <div class="timer-buttons">
+      <button class="timer-btn" id="startBtn">▶ START</button>
+      <button class="timer-btn" id="pauseBtn">⏸ PAUSE</button>
+      <button class="timer-btn" id="resetBtn">⟳ RESET</button>
     </div>
+  </div>
 
-    <!-- GARDEN -->
-    <div class="garden-title">
-      <h2>🌻 my pixel plot</h2>
-      <button class="reset-garden" id="resetGardenBtn">clear garden 🌱</button>
+  <!-- GARDEN + PIXEL ANIME CHARACTER -->
+  <div class="garden-section">
+    <div class="garden-header">
+      <span>🌱 MY PIXEL PLOT</span>
+      <button class="reset-garden" id="resetGardenBtn">CLEAR GARDEN</button>
     </div>
     <div class="garden-grid" id="gardenGrid"></div>
+
+    <!-- cute pixel anime girl (emoji + pixel border) -->
+    <div class="character">
+      <div class="pixel-sprite">
+        👧🏻🌼
+      </div>
+      <div style="font-size:0.5rem; margin-top: 4px;">「 plant keeper ˗ˋˏ ♡ ˎˊ˗ 」</div>
+    </div>
     <div class="info-text">
-      🍅 each 25min focus session = 1 new plant. <br>
-      plants are saved in your browser. keep growing!
+      🎮 each 25min focus = 1 pixel plant grows!<br>
+      💾 garden auto-saves — keep nurturing your digital patch.
     </div>
   </div>
+
   <div class="footer">
-    💾 garden auto‑saves · pixel power · be kind to your focus
+    ⚡ pixel mode · sage pastel · grow with intention
   </div>
 </div>
 
 <script>
-  // ---- TIMER LOGIC ----
-  let timeLeft = 25 * 60; // seconds
+  // ---------- TIMER ----------
+  let timeLeft = 25 * 60;
   let timerInterval = null;
   let isRunning = false;
 
@@ -240,10 +269,8 @@
   }
 
   function completePomodoro() {
-    // only add plant if timer finishes (not reset)
     if (timeLeft === 0) {
       addPlantToGarden();
-      // reset timer to 25:00 but don't auto-start
       timeLeft = 25 * 60;
       updateTimerDisplay();
       if (timerInterval) {
@@ -289,12 +316,17 @@
   pauseBtn.addEventListener('click', pauseTimer);
   resetBtn.addEventListener('click', resetTimer);
 
-  // ---- GARDEN (local storage) ----
-  const GARDEN_KEY = 'pomodoro_garden';
-  let gardenPlants = []; // array of booleans (true = plant exists)
-  const MAX_PLANTS = 16; // 4x4 grid
-
+  // ---------- GARDEN WITH LOCALSTORAGE ----------
+  const GARDEN_KEY = 'pixel_pomodoro_garden';
+  let gardenPlants = []; // boolean array
+  const MAX_PLANTS = 16;
   const gardenGrid = document.getElementById('gardenGrid');
+
+  // cute pixel plant sprites (different per index)
+  const plantSprites = [
+    '🌱','🌿','🍃','🌸','🌻','🍓','🍄','🌼',
+    '🌺','🍀','🌵','🎋','🍂','✨','💚','🍎'
+  ];
 
   function saveGarden() {
     localStorage.setItem(GARDEN_KEY, JSON.stringify(gardenPlants));
@@ -316,33 +348,27 @@
       const plot = document.createElement('div');
       plot.classList.add('plot');
       if (gardenPlants[i]) {
-        plot.classList.add('pixel-plant');
-        // different emoji plants based on index for cuteness
-        const plants = ['🌱','🌿','🍃','🌸','🌻','🍓','🍄','⭐️','💚','🌼','🌺','🍀','🌵','🎋','🍂','✨'];
-        plot.textContent = plants[i % plants.length];
+        plot.classList.add('has-plant');
+        plot.textContent = plantSprites[i % plantSprites.length];
       } else {
-        plot.textContent = '🟫'; // tiny dirt patch
-        plot.style.opacity = '0.6';
+        plot.textContent = '🟫'; // pixel dirt
+        plot.style.opacity = '0.7';
       }
       gardenGrid.appendChild(plot);
     }
   }
 
   function addPlantToGarden() {
-    // find first empty slot
-    const emptyIndex = gardenPlants.findIndex(hasPlant => hasPlant === false);
+    const emptyIndex = gardenPlants.findIndex(has => has === false);
     if (emptyIndex !== -1) {
       gardenPlants[emptyIndex] = true;
       saveGarden();
       renderGarden();
     } else {
-      // garden full! show a little celebration alert (optional)
       const infoDiv = document.querySelector('.info-text');
-      const originalText = infoDiv.innerHTML;
-      infoDiv.innerHTML = '🎉 your garden is full! clear it or keep growing in spirit 🎉';
-      setTimeout(() => {
-        infoDiv.innerHTML = originalText;
-      }, 3000);
+      const original = infoDiv.innerHTML;
+      infoDiv.innerHTML = '🎉 GARDEN FULL! Clear it to grow more 🎉';
+      setTimeout(() => { infoDiv.innerHTML = original; }, 3000);
     }
   }
 
@@ -353,18 +379,8 @@
   }
 
   document.getElementById('resetGardenBtn').addEventListener('click', resetGarden);
-
-  // initialise
   loadGarden();
   updateTimerDisplay();
-
-  // optional: prevent accidental page reload losing timer
-  window.addEventListener('beforeunload', () => {
-    if (isRunning) {
-      // gentle reminder (optional)
-      return "Timer is running. Are you sure you want to leave?";
-    }
-  });
 </script>
 </body>
 </html>
