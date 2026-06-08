@@ -12,25 +12,22 @@
     }
 
     body {
-      background: #EFF6EB;  /* soft sage background */
+      background: #EFF6EB;
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       color: #2C3E2B;
       line-height: 1.5;
       padding: 1.5rem;
     }
 
-    /* main container – cozy & centered */
     .container {
       max-width: 1000px;
       margin: 0 auto;
-      background: #FEFCF5;  /* warm off-white, like paper */
+      background: #FEFCF5;
       border-radius: 48px 48px 48px 32px;
       box-shadow: 0 20px 35px -12px rgba(70, 60, 40, 0.12);
       overflow: hidden;
-      transition: all 0.2s ease;
     }
 
-    /* cute header */
     .header {
       padding: 2rem 2rem 1rem 2rem;
       text-align: center;
@@ -71,21 +68,17 @@
       border-radius: 60px;
       color: #4A6641;
       font-weight: 450;
-      backdrop-filter: blur(2px);
     }
 
-    /* main content */
     .content {
       padding: 2rem 2rem 1.8rem 2rem;
     }
 
-    /* about section */
     .about {
       background: #F9FCF7;
       border-radius: 32px;
       padding: 1.8rem;
       margin-bottom: 2rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
       border: 1px solid #E3EFDA;
     }
 
@@ -99,13 +92,6 @@
       margin-bottom: 1rem;
     }
 
-    .about p {
-      font-size: 1.05rem;
-      margin-bottom: 1rem;
-      color: #3D4F38;
-    }
-
-    /* cutesy grid for facts & current */
     .cute-grid {
       display: flex;
       flex-wrap: wrap;
@@ -125,7 +111,6 @@
     }
     .card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 18px 28px -10px #AFC49F80;
     }
 
     .card h3 {
@@ -146,7 +131,6 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 0.95rem;
     }
 
     .mood-btn {
@@ -169,7 +153,30 @@
       transform: scale(0.97);
     }
 
-    /* polaroid / gallery vibe */
+    /* blog button style */
+    .blog-btn {
+      background: #DDEAD4;
+      border: 2px solid #C2D5B3;
+      padding: 0.7rem 1.4rem;
+      border-radius: 60px;
+      font-size: 1rem;
+      font-weight: 550;
+      font-family: inherit;
+      color: #4B693D;
+      cursor: pointer;
+      transition: 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 3px 6px #C2D5B380;
+    }
+    .blog-btn:hover {
+      background: #CFE2C4;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px #B2CA9F80;
+    }
+
     .polaroid {
       background: white;
       border-radius: 28px;
@@ -177,7 +184,6 @@
       text-align: center;
       margin-bottom: 2rem;
       border: 1px solid #E7F1E0;
-      box-shadow: 0 10px 15px -8px rgba(0,0,0,0.05);
     }
     .polaroid-placeholder {
       background: #E2ECDA;
@@ -189,14 +195,7 @@
       font-size: 3rem;
       color: #7B9A6B;
     }
-    .polaroid p {
-      margin-top: 0.8rem;
-      font-size: 0.9rem;
-      color: #6C8760;
-      letter-spacing: -0.2px;
-    }
 
-    /* footer */
     .footer {
       background: #F6FBF2;
       padding: 1.5rem 2rem;
@@ -221,32 +220,14 @@
     }
     .social-icons a:hover {
       color: #4B693D;
-      transform: translateY(-2px);
     }
 
-    /* responsive */
     @media (max-width: 660px) {
-      body {
-        padding: 0.8rem;
-      }
-      .content {
-        padding: 1.5rem;
-      }
-      h1 {
-        font-size: 2rem;
-      }
-      .cute-grid {
-        flex-direction: column;
-      }
-      .footer {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-
-    /* extra cuteness */
-    .sparkle {
-      font-size: 0.9rem;
+      body { padding: 0.8rem; }
+      .content { padding: 1.5rem; }
+      h1 { font-size: 2rem; }
+      .cute-grid { flex-direction: column; }
+      .footer { flex-direction: column; }
     }
     hr {
       border: none;
@@ -254,18 +235,18 @@
       background: linear-gradient(90deg, #DDEAD4, #FEFCF5, #DDEAD4);
       margin: 1rem 0;
     }
+    .button-center {
+      text-align: center;
+      margin: 1.5rem 0 1rem;
+    }
   </style>
 </head>
 <body>
 <div class="container">
   <div class="header">
-    <div class="avatar">
-      🍃
-    </div>
+    <div class="avatar">🍃</div>
     <h1>hi, i'm <span style="color:#8BAF7A;">sarah</span></h1>
-    <div class="tagline">
-      ✨ soft & curious · design + code ✨
-    </div>
+    <div class="tagline">✨ soft & curious · design + code ✨</div>
   </div>
 
   <div class="content">
@@ -279,36 +260,36 @@
       <div class="card">
         <h3>🍰 favorites</h3>
         <ul>
-          <li>📖 <span>studio ghibli soundtracks</span></li>
-          <li>☁️ <span>cloud watching & slow walks</span></li>
-          <li>🧸 <span>plushie collecting</span></li>
-          <li>🍵 <span>oat milk chai / sage tea</span></li>
+          <li>📖 studio ghibli soundtracks</li>
+          <li>☁️ cloud watching & slow walks</li>
+          <li>🧸 plushie collecting</li>
+          <li>🍵 oat milk chai / sage tea</li>
         </ul>
       </div>
       <div class="card">
         <h3>✨ currently</h3>
         <ul>
-          <li>🎧 <span>playlist: “sunlit mornings”</span></li>
-          <li>📚 <span>reading: "braiding sweetgrass"</span></li>
-          <li>🧸 <span>building a little zine</span></li>
-          <li>🌸 <span>learning hiragana</span></li>
+          <li>🎧 playlist: “sunlit mornings”</li>
+          <li>📚 reading: "braiding sweetgrass"</li>
+          <li>🧸 building a little zine</li>
+          <li>🌸 learning hiragana</li>
         </ul>
         <button class="mood-btn" id="moodButton">🌼 today's mood · happy 🌼</button>
       </div>
     </div>
 
-    <!-- cute polaroid section -->
+    <!-- 🌟 BLOG BUTTON (added here) 🌟 -->
+    <div class="button-center">
+      <a href="blog.html" class="blog-btn">📔 read my blog →</a>
+    </div>
+
     <div class="polaroid">
-      <div class="polaroid-placeholder">
-        🐻‍❄️ 📸  ✨
-      </div>
+      <div class="polaroid-placeholder">🐻‍❄️ 📸 ✨</div>
       <p>a snapshot of my desk — always with a plant and a little friend 💚</p>
     </div>
 
     <hr>
-    <div style="text-align: center; margin-top: 0.5rem;">
-      <span class="sparkle">✧ ˖ ° 𐐪𐑂 ♡ 𐐪𐑂 ° ˖ ✧</span>
-    </div>
+    <div style="text-align: center;"><span class="sparkle">✧ ˖ ° 𐐪𐑂 ♡ 𐐪𐑂 ° ˖ ✧</span></div>
   </div>
 
   <div class="footer">
@@ -318,24 +299,18 @@
       <a href="#" aria-label="github">🐙</a>
       <a href="#" aria-label="email">✉️</a>
       <a href="#" aria-label="bluesky">🦋</a>
+      <a href="blog.html" aria-label="blog">📔</a>
     </div>
   </div>
 </div>
 
 <script>
-  // little interactive mood toggle (extra cuteness)
   const moodBtn = document.getElementById('moodButton');
   let moodState = 0;
-  const moods = [
-    '🌼 today\'s mood · happy 🌼',
-    '🍃 dreamy & calm 🌿',
-    '🌸 playful & creative 🧸',
-    '🌙 cozy sleepy vibes ☁️'
-  ];
+  const moods = ['🌼 today\'s mood · happy 🌼', '🍃 dreamy & calm 🌿', '🌸 playful & creative 🧸', '🌙 cozy sleepy vibes ☁️'];
   moodBtn.addEventListener('click', () => {
     moodState = (moodState + 1) % moods.length;
     moodBtn.textContent = moods[moodState];
-    // optional: tiny bounce effect
     moodBtn.style.transform = 'scale(0.97)';
     setTimeout(() => { moodBtn.style.transform = ''; }, 120);
   });
