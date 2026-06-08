@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌿 my little blog · sarah</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #EFF6EB;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #2C3E2B;
+      line-height: 1.5;
+      padding: 1.5rem;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 0 auto;
+      background: #FEFCF5;
+      border-radius: 48px 48px 48px 32px;
+      box-shadow: 0 20px 35px -12px rgba(70, 60, 40, 0.12);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 2rem 2rem 1rem 2rem;
+      text-align: center;
+      background: #FFFFFFD9;
+      border-bottom: 2px solid #DDEAD4;
+    }
+
+    .back-home {
+      display: inline-block;
+      background: #EFF6EB;
+      border-radius: 60px;
+      padding: 0.4rem 1.2rem;
+      text-decoration: none;
+      font-size: 0.9rem;
+      color: #5F7C53;
+      margin-bottom: 1rem;
+      transition: 0.2s;
+      font-weight: 500;
+    }
+    .back-home:hover {
+      background: #E2EFD8;
+      transform: translateX(-4px);
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: #5F7C53;
+      margin-bottom: 0.25rem;
+    }
+
+    .blog-sub {
+      color: #7B9A6B;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .content {
+      padding: 2rem;
+    }
+
+    .blog-posts {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .post-card {
+      background: white;
+      border-radius: 32px;
+      padding: 1.5rem;
+      border: 1px solid #E0EDD6;
+      transition: 0.2s ease;
+      box-shadow: 0 5px 12px #CBDBC055;
+    }
+    .post-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 22px #BED1AE70;
+    }
+
+    .post-date {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #8DAF7A;
+      margin-bottom: 0.5rem;
+    }
+
+    .post-title {
+      font-size: 1.6rem;
+      font-weight: 550;
+      color: #4F6943;
+      margin-bottom: 0.75rem;
+    }
+
+    .post-summary {
+      color: #3D5438;
+      margin-bottom: 1rem;
+    }
+
+    .read-more {
+      background: #EFF6EB;
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+      font-family: inherit;
+      font-size: 0.8rem;
+      color: #6D8F5E;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-block;
+      text-decoration: none;
+    }
+    .read-more:hover {
+      background: #E2EFD8;
+      transform: scale(0.97);
+    }
+
+    .footer {
+      background: #F6FBF2;
+      padding: 1.2rem;
+      text-align: center;
+      border-top: 2px solid #E0EDD6;
+      font-size: 0.8rem;
+      color: #7B9A6B;
+    }
+
+    hr {
+      border: none;
+      height: 1px;
+      background: #E3EFDA;
+      margin: 1rem 0;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 0.8rem; }
+      .post-title { font-size: 1.3rem; }
+      .content { padding: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <a href="index.html" class="back-home">← back home</a>
+    <h1>📔 my little blog</h1>
+    <div class="blog-sub">soft thoughts · cozy code · daily moments</div>
+  </div>
+
+  <div class="content">
+    <div class="blog-posts">
+      
+      <!-- sample post 1 -->
+      <div class="post-card">
+        <div class="post-date">june 5, 2026</div>
+        <div class="post-title">matcha & morning light</div>
+        <div class="post-summary">there’s something special about the first sip of matcha when the sun hits the window just right. today i'm sharing my tiny morning ritual and a new playlist i made for slow starts 🍵✨</div>
+        <a href="#" class="read-more">continue reading →</a>
+      </div>
+
+      <!-- sample post 2 -->
+      <div class="post-card">
+        <div class="post-date">may 28, 2026</div>
+        <div class="post-title">how i built this website</div>
+        <div class="post-summary">a behind-the-scenes look at creating my little corner of the internet – choosing sage green, helvetica neue, and adding cute interactions like the mood button 🌸</div>
+        <a href="#" class="read-more">continue reading →</a>
+      </div>
+
+      <!-- sample post 3 -->
+      <div class="post-card">
+        <div class="post-date">may 20, 2026</div>
+        <div class="post-title">my favorite ghibli soundtracks for coding</div>
+        <div class="post-summary">from howl's moving castle to kiki's delivery service – these piano pieces make any bug-fixing session feel magical. 🎹🐞</div>
+        <a href="#" class="read-more">continue reading →</a>
+      </div>
+
+      <!-- sample post 4 – you can add more -->
+      <div class="post-card">
+        <div class="post-date">may 12, 2026</div>
+        <div class="post-title">plant update: my little sage garden</div>
+        <div class="post-summary">my windowsill herb garden is thriving! turns out talking to your plants actually works. plus: my new favorite soil mix 🌿</div>
+        <a href="#" class="read-more">continue reading →</a>
+      </div>
+    </div>
+
+    <hr>
+    <div style="text-align: center; font-size: 0.8rem; margin-top: 1rem;">
+      ✨ more posts coming soon — thanks for reading ✨
+    </div>
+  </div>
+
+  <div class="footer">
+    🌸 from sarah with a cup of tea · <a href="index.html" style="color:#7F9C6E;">back home</a>
+  </div>
+</div>
+</body>
+</html>
