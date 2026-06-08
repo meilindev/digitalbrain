@@ -99,14 +99,15 @@
 
     /* WIND HORSE THEME (overrides) */
     body.windhorse {
-      background-color: #FEF7E8;
+      background-color: #E8DCC8;
       font-family: 'Inter', sans-serif;
       color: #2C2418;
     }
     body.windhorse .container {
-      background: transparent;
-      box-shadow: none;
-      border-radius: 0;
+      background: #FEF7E8;
+      border-radius: 48px 48px 48px 32px;
+      box-shadow: 0 20px 35px -12px rgba(40, 30, 20, 0.2);
+      overflow: hidden;
     }
     body.windhorse .header {
       background: #FEF7E8;
@@ -133,10 +134,9 @@
       border-radius: 40px;
     }
     body.windhorse .blog-btn:hover { background: #9E3C2C; }
-    /* ensure the pomodoro button (which also has class blog-btn) gets same style */
     body.windhorse .polaroid { background: #FFFCF5; border: 1px solid #EBE0CE; }
     body.windhorse .polaroid-placeholder { background: #EDE3D1; }
-    body.windhorse .footer { background: #2C2418; color: #E3D5BE; border-top: none; }
+    body.windhorse .footer { background: #2C2418; color: #E3D5BE; border-top: none; border-radius: 0 0 48px 32px; }
     body.windhorse .footer a, body.windhorse .social-icons a { color: #E3D5BE; }
     body.windhorse .mood-btn { background: #EDE3D1; border-color: #CBBFAA; color: #2C3A47; }
   </style>
@@ -173,7 +173,7 @@
 
     <div class="button-center">
       <a href="blog.html" class="blog-btn">📔 read my blog →</a>
-      <a href="garden.html" class="blog-btn">🕰️ pomodoro →</a>
+      <a href="pomodoro.html" class="blog-btn">pomodoro</a>
     </div>
 
     <div class="polaroid">
