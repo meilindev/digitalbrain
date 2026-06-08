@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌱 pomodoro seedling garden · sarah</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #EFF6EB;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #2C3E2B;
+      line-height: 1.5;
+      padding: 1.5rem;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #FEFCF5;
+      border-radius: 48px 48px 48px 32px;
+      box-shadow: 0 20px 35px -12px rgba(70, 60, 40, 0.12);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 1.5rem;
+      text-align: center;
+      background: #FFFFFFD9;
+      border-bottom: 2px solid #DDEAD4;
+    }
+
+    .back-home {
+      display: inline-block;
+      background: #EFF6EB;
+      border-radius: 60px;
+      padding: 0.4rem 1.2rem;
+      text-decoration: none;
+      font-size: 0.85rem;
+      color: #5F7C53;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #5F7C53;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .content {
+      padding: 2rem;
+    }
+
+    /* timer panel */
+    .timer-panel {
+      background: #F9FCF7;
+      border-radius: 32px;
+      padding: 1.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      border: 1px solid #E3EFDA;
+    }
+
+    .timer-display {
+      font-size: 3.5rem;
+      font-weight: 600;
+      font-family: monospace;
+      background: #EFF6EB;
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      border-radius: 60px;
+      letter-spacing: 4px;
+      color: #4F6943;
+      margin-bottom: 1rem;
+    }
+
+    .timer-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .timer-btn {
+      background: #EFF6EB;
+      border: 1px solid #CDE0C1;
+      padding: 0.5rem 1.2rem;
+      border-radius: 60px;
+      font-family: inherit;
+      font-weight: 500;
+      color: #5F7C53;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .timer-btn:hover {
+      background: #E2EFD8;
+      transform: translateY(-2px);
+    }
+
+    /* pixel garden */
+    .garden-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .garden-title h2 {
+      font-size: 1.5rem;
+      color: #5F7C53;
+    }
+    .reset-garden {
+      background: none;
+      border: 1px solid #CDE0C1;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      color: #7B9A6B;
+    }
+
+    .garden-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      background: #EFF6EB;
+      padding: 1.5rem;
+      border-radius: 32px;
+      border: 2px solid #DDEAD4;
+      margin-bottom: 1rem;
+    }
+
+    .plot {
+      aspect-ratio: 1 / 1;
+      background: #E2ECDA;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      box-shadow: inset 0 0 0 2px #FEFCF5, 0 4px 8px rgba(0,0,0,0.02);
+      transition: 0.1s linear;
+    }
+
+    /* pixelated vibe */
+    .plot.pixel-plant {
+      background: #DDEAD4;
+      box-shadow: 0 0 0 2px #B2CA9F;
+    }
+
+    .info-text {
+      font-size: 0.8rem;
+      text-align: center;
+      color: #7B9A6B;
+      margin-top: 0.5rem;
+    }
+
+    hr {
+      border: none;
+      height: 1px;
+      background: #E3EFDA;
+      margin: 1rem 0;
+    }
+
+    .footer {
+      background: #F6FBF2;
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #7B9A6B;
+    }
+
+    @media (max-width: 500px) {
+      .timer-display { font-size: 2.5rem; }
+      .plot { font-size: 1.6rem; }
+      .garden-grid { gap: 8px; padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <a href="index.html" class="back-home">← back home</a>
+    <h1>🌱 pomodoro seedling garden 🌱</h1>
+    <p style="margin-top: 0.5rem;">each completed pomodoro grows a new plant ✨</p>
+  </div>
+
+  <div class="content">
+    <!-- TIMER -->
+    <div class="timer-panel">
+      <div class="timer-display" id="timerDisplay">25:00</div>
+      <div class="timer-buttons">
+        <button class="timer-btn" id="startBtn">▶ start</button>
+        <button class="timer-btn" id="pauseBtn">⏸ pause</button>
+        <button class="timer-btn" id="resetBtn">🔄 reset</button>
+      </div>
+    </div>
+
+    <!-- GARDEN -->
+    <div class="garden-title">
+      <h2>🌻 my pixel plot</h2>
+      <button class="reset-garden" id="resetGardenBtn">clear garden 🌱</button>
+    </div>
+    <div class="garden-grid" id="gardenGrid"></div>
+    <div class="info-text">
+      🍅 each 25min focus session = 1 new plant. <br>
+      plants are saved in your browser. keep growing!
+    </div>
+  </div>
+  <div class="footer">
+    💾 garden auto‑saves · pixel power · be kind to your focus
+  </div>
+</div>
+
+<script>
+  // ---- TIMER LOGIC ----
+  let timeLeft = 25 * 60; // seconds
+  let timerInterval = null;
+  let isRunning = false;
+
+  const timerDisplay = document.getElementById('timerDisplay');
+  const startBtn = document.getElementById('startBtn');
+  const pauseBtn = document.getElementById('pauseBtn');
+  const resetBtn = document.getElementById('resetBtn');
+
+  function updateTimerDisplay() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  }
+
+  function completePomodoro() {
+    // only add plant if timer finishes (not reset)
+    if (timeLeft === 0) {
+      addPlantToGarden();
+      // reset timer to 25:00 but don't auto-start
+      timeLeft = 25 * 60;
+      updateTimerDisplay();
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        isRunning = false;
+      }
+    }
+  }
+
+  function startTimer() {
+    if (timerInterval) return;
+    isRunning = true;
+    timerInterval = setInterval(() => {
+      if (timeLeft > 0) {
+        timeLeft--;
+        updateTimerDisplay();
+        if (timeLeft === 0) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          isRunning = false;
+          completePomodoro();
+        }
+      }
+    }, 1000);
+  }
+
+  function pauseTimer() {
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      isRunning = false;
+    }
+  }
+
+  function resetTimer() {
+    pauseTimer();
+    timeLeft = 25 * 60;
+    updateTimerDisplay();
+  }
+
+  startBtn.addEventListener('click', startTimer);
+  pauseBtn.addEventListener('click', pauseTimer);
+  resetBtn.addEventListener('click', resetTimer);
+
+  // ---- GARDEN (local storage) ----
+  const GARDEN_KEY = 'pomodoro_garden';
+  let gardenPlants = []; // array of booleans (true = plant exists)
+  const MAX_PLANTS = 16; // 4x4 grid
+
+  const gardenGrid = document.getElementById('gardenGrid');
+
+  function saveGarden() {
+    localStorage.setItem(GARDEN_KEY, JSON.stringify(gardenPlants));
+  }
+
+  function loadGarden() {
+    const saved = localStorage.getItem(GARDEN_KEY);
+    if (saved) {
+      gardenPlants = JSON.parse(saved);
+    } else {
+      gardenPlants = new Array(MAX_PLANTS).fill(false);
+    }
+    renderGarden();
+  }
+
+  function renderGarden() {
+    gardenGrid.innerHTML = '';
+    for (let i = 0; i < MAX_PLANTS; i++) {
+      const plot = document.createElement('div');
+      plot.classList.add('plot');
+      if (gardenPlants[i]) {
+        plot.classList.add('pixel-plant');
+        // different emoji plants based on index for cuteness
+        const plants = ['🌱','🌿','🍃','🌸','🌻','🍓','🍄','⭐️','💚','🌼','🌺','🍀','🌵','🎋','🍂','✨'];
+        plot.textContent = plants[i % plants.length];
+      } else {
+        plot.textContent = '🟫'; // tiny dirt patch
+        plot.style.opacity = '0.6';
+      }
+      gardenGrid.appendChild(plot);
+    }
+  }
+
+  function addPlantToGarden() {
+    // find first empty slot
+    const emptyIndex = gardenPlants.findIndex(hasPlant => hasPlant === false);
+    if (emptyIndex !== -1) {
+      gardenPlants[emptyIndex] = true;
+      saveGarden();
+      renderGarden();
+    } else {
+      // garden full! show a little celebration alert (optional)
+      const infoDiv = document.querySelector('.info-text');
+      const originalText = infoDiv.innerHTML;
+      infoDiv.innerHTML = '🎉 your garden is full! clear it or keep growing in spirit 🎉';
+      setTimeout(() => {
+        infoDiv.innerHTML = originalText;
+      }, 3000);
+    }
+  }
+
+  function resetGarden() {
+    gardenPlants = new Array(MAX_PLANTS).fill(false);
+    saveGarden();
+    renderGarden();
+  }
+
+  document.getElementById('resetGardenBtn').addEventListener('click', resetGarden);
+
+  // initialise
+  loadGarden();
+  updateTimerDisplay();
+
+  // optional: prevent accidental page reload losing timer
+  window.addEventListener('beforeunload', () => {
+    if (isRunning) {
+      // gentle reminder (optional)
+      return "Timer is running. Are you sure you want to leave?";
+    }
+  });
+</script>
+</body>
+</html>
